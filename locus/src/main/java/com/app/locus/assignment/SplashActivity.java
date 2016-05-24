@@ -2,6 +2,7 @@ package com.app.locus.assignment;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.ListActivity;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -24,6 +25,8 @@ import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -52,6 +55,11 @@ public class SplashActivity extends Activity implements OnClickListener{
     String name;
     String password;
 
+    InputStream is = null;
+
+    String json = null;
+    JSONObject jObj = null;
+    String result = null;
     private static final String FORGOT_URL = "http://www.kickassassignmenthelp.com/wp-content/themes/assignment/lost-data.php";
     //http://www.kickassassignmenthelp.com/wp-content/themes/assignment/lost-data.php
  
@@ -177,17 +185,67 @@ public class SplashActivity extends Activity implements OnClickListener{
                             @Override
                             protected String doInBackground(String... params) {
 
-                                HashMap<String, String> data = new HashMap<String, String>();
+                              //  HashMap<String, String> data = new HashMap<String, String>();
 
-                                data.put("email", params[0]);
+                                List<NameValuePair> data = new ArrayList<NameValuePair>();
+                                data.add(new BasicNameValuePair("email" , params[0]));
 
-                               // String result = ruc.sendPostRequest(FORGOT_URL, data);
+
+                                try {
+                                    HttpClient client = new DefaultHttpClient();
+                                    HttpPost post = new HttpPost(FORGOT_URL);
+                                    post.setEntity(new UrlEncodedFormEntity(data));
+                                    HttpResponse response = client.execute(post);
+                                    HttpEntity entity = response.getEntity();
+                                    is = entity.getContent();
+
+
+                                } catch (UnsupportedEncodingException e) {
+                                    e.printStackTrace();
+                                } catch (ClientProtocolException e) {
+                                    e.printStackTrace();
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
+
+
+                                try {
+                                    BufferedReader reader = new BufferedReader(new InputStreamReader(
+                                            is, "utf-8"), 8);
+                                    StringBuilder sb = new StringBuilder();
+                                    String line = null;
+                                    while ((line = reader.readLine()) != null) {
+                                        sb.append(line).append("\n");
+                                    }
+                                    is.close();
+                                    json = sb.toString();
+                                } catch (Exception e) {
+                                    Log.e("Buffer Error", "Error converting result " + e.toString());
+                                }
+
+                                // String result = ruc.sendPostRequest(FORGOT_URL, data);
 
                             //   System.out.println(result);
                                // Toast.makeText(getApplicationContext(), "Hiiii"+result,  Toast.LENGTH_SHORT).show();
 
+                                try {
+                                    jObj = new JSONObject(json);
+                                } catch (JSONException e) {
+                                    Log.e("JSON Parser", "Error parsing data " + e.toString());
+                                }
 
-                                return null;
+                                try {
+                                    String TAG = "message";
+                                    if (jObj != null) {
+                                        result = jObj.getString(TAG);
+                                    }
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+
+
+
+                                return result;
 
 
                             }
