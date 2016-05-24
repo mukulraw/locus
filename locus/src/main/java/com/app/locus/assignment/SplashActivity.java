@@ -181,13 +181,13 @@ public class SplashActivity extends Activity implements OnClickListener{
 
                                 data.put("email", params[0]);
 
-                                String result = ruc.sendPostRequest(FORGOT_URL, data);
+                               // String result = ruc.sendPostRequest(FORGOT_URL, data);
 
-                               System.out.println(result);
+                            //   System.out.println(result);
                                // Toast.makeText(getApplicationContext(), "Hiiii"+result,  Toast.LENGTH_SHORT).show();
 
 
-                                return result;
+                                return null;
 
 
                             }

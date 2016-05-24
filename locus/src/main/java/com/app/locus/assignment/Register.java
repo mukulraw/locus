@@ -5,6 +5,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -14,8 +15,13 @@ import android.widget.Toast;
 
 import com.app.locus.utils.Util;
 
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
+
+import java.util.ArrayList;
 import java.util.HashMap;
- 
+import java.util.List;
+
 public class Register extends Activity implements View.OnClickListener{
  
 	/*
@@ -107,7 +113,7 @@ public class Register extends Activity implements View.OnClickListener{
     /*
      * AsyncTask is an abstract class. which helps us to use the UI thread properly.
      */
-    private void register(String name, String mobile, String email, String password) {
+    private void register(String name, String mobile, String email, final String password) {
         class RegisterUser extends AsyncTask<String, Void, String>{
             ProgressDialog loading;
             RegisterUserClass ruc = new RegisterUserClass();
@@ -141,11 +147,16 @@ public class Register extends Activity implements View.OnClickListener{
             @Override
             protected String doInBackground(String... params) {
 
+
+
+                /*
+
                 HashMap<String, String> data = new HashMap<String,String>();
 
                 data.put("name",params[0]);
-                data.put("mobile",params[1]);
-                data.put("email",params[2]);
+                data.put("email",params[1]);
+                data.put("mobile",params[2]);
+
                 data.put("password",params[3]);
  
                 result = ruc.sendPostRequest(REGISTER_URL,data);
@@ -155,6 +166,20 @@ public class Register extends Activity implements View.OnClickListener{
                 //Toast.makeText(getApplicationContext(), result, Toast.LENGTH_LONG).show();
 
                 //System.out.println("I'm getting the response........................................ : "+result);
+
+                */
+
+
+                List<NameValuePair> data = new ArrayList<NameValuePair>();
+                data.add(new BasicNameValuePair("name" , params[0]));
+                data.add(new BasicNameValuePair("email" , params[1]));
+                data.add(new BasicNameValuePair("mobile" , params[2]));
+                data.add(new BasicNameValuePair("password" , params[3]));
+
+                result = ruc.sendPostRequest(REGISTER_URL , data);
+
+
+                Log.e("asdasdasd" , result);
 
                 return  result;
 
