@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    
+    android:background="@drawable/cool1"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+    
+  
+    <!-- Header aligned to top -->
+
+    <RelativeLayout
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:background="#6699FF"
+        android:gravity="center" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:textStyle="bold"
+            android:text="@string/register_here_"
+            android:textColor="#FFFFFF"
+            android:textSize="23sp" />
+    </RelativeLayout>
+
+    <!-- Footer aligned to bottom -->
+
+    <RelativeLayout
+        android:id="@+id/footer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="#666666"
+        android:gravity="center" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:text="@string/all_rights_reserved_"
+            android:textColor="#FFFFFF"
+            android:textSize="15sp" />
+    </RelativeLayout>
+
+
+
+
+    <Button
+        android:id="@+id/button5"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="22dp"
+        android:layout_height="22dp"
+        android:layout_marginTop="5dp"
+        android:layout_alignLeft="@+id/button4"
+        android:layout_alignTop="@+id/et_emailId"
+        android:background="@drawable/mail"
+        android:gravity="left" />
+
+    <Button
+        android:id="@+id/button6"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_alignLeft="@+id/button5"
+        android:layout_alignTop="@+id/et_password"
+        android:background="@drawable/lock"
+        android:gravity="left" />
+
+    <Button
+        android:id="@+id/button3"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_alignRight="@+id/button4"
+        android:layout_alignTop="@+id/et_userName"
+        android:background="@drawable/user"
+        android:gravity="left" />
+
+    <Button
+        android:id="@+id/button2"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="65dp"
+        android:layout_height="65dp"
+        android:layout_below="@+id/header"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="13dp"
+        android:background="@drawable/main"
+        android:gravity="center" />
+
+    <Button
+        android:id="@+id/button4"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="29dp"
+        android:layout_height="25dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignTop="@+id/et_mobileNumber"
+        android:layout_marginLeft="14dp"
+        android:background="@drawable/phone"
+        android:gravity="left" />
+
+    <EditText
+        android:id="@+id/et_emailId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/et_mobileNumber"
+        android:layout_marginTop="17dp"
+        android:ems="10"
+        android:textStyle="normal"
+        android:textSize="14dp"
+        android:gravity="center"
+        android:hint="Email ID"
+        android:inputType="textEmailAddress" />
+
+    <EditText
+        android:id="@+id/et_password"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/et_emailId"
+        android:layout_marginTop="12dp"
+        android:ems="10"
+        android:textStyle="normal"
+        android:textSize="14dp"
+        android:gravity="center"
+        android:hint="Password"
+        android:inputType="textPassword" />
+
+    <EditText
+        android:id="@+id/et_mobileNumber"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/button2"
+        android:layout_marginTop="87dp"
+        android:ems="10"
+        android:maxLength="10"
+        android:textStyle="normal"
+        android:textSize="14dp"
+        android:gravity="center"
+        android:hint="Mobile No."
+        android:inputType="phone" />
+
+    <EditText
+        android:id="@+id/et_userName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/button4"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="16dp"
+        android:ems="10"
+        android:textStyle="normal"
+        android:textSize="14dp"
+        android:gravity="center"
+        android:hint="Screen Name"
+        android:inputType="textPersonName" />
+
+    <Button
+        android:id="@+id/registerBtn"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="201dp"
+        android:layout_height="50dp"
+        android:layout_below="@+id/et_password"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp"
+        android:background="#28e7b2"
+        android:onClick="onRegister"
+        android:text="Submit"
+        android:textColor="#FFFFFF" />
+
+
+    <TextView
+        android:id="@+id/tv_login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/footer"
+        android:layout_centerHorizontal="true"
+        android:textSize="14dp"
+        android:layout_marginBottom="23dp"
+        android:text="@string/txt_hint_login"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+   
+</RelativeLayout>

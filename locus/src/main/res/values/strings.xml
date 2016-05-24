@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Locus</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="title_activity_register">Register</string>
+    <string name="title_activity_firstpage">Firstpage</string>
+    <string name="title_activity_reminder">Reminder</string>
+    <string name="title_activity_edittext_bg">Edittext_bg</string>
+    <string name="title_activity_addcourse">Addcourse</string>
+    <string name="txt_hint_register"><u>New User? Register Now.</u></string>
+    <string name="txt_hint_login"><u>Already Registered? Login Now.</u></string>
+
+    <string name="txt_hint_signin">SIGN IN</string>
+    <string name="txt_hint_registerdemo">REGISTER</string>
+    
+    <string name="txt_hint_forgot_password"><u>Forgot Password ?</u></string>
+    <string name="title_activity_admin">Admin</string>
+    <string name="title_activity_assignment">Assignment</string>
+    
+    <string name="title_activity_index">Kick Ass Assignments</string>
+
+    <color name="grey">#808080ff</color>
+    <color name="white">#ffffffff</color>
+
+
+<!--
+
+    <string-array name="array_type1">
+
+        <item>&#45;&#45;Select Country&#45;&#45;</item>
+        <item>VALUE 2</item>
+    </string-array>
+
+
+    <string-array name="array_type2">
+        <item>&#45;&#45;Select Subject&#45;&#45;</item>
+        <item>VALUE 2</item>
+    </string-array>
+
+
+    <string-array name="array_type3">
+        <item>&#45;&#45;Select Grade&#45;&#45;</item>
+        <item>VALUE 2</item>
+    </string-array>
+
+
+    <string-array name="array_type4">
+        <item>&#45;&#45;Select Reference&#45;&#45;</item>
+        <item>VALUE 2</item>
+    </string-array>
+-->
+
+    <string name="title_activity_dumyfirstpage">Dumyfirstpage</string>
+    
+    <string name="app_user_email_address">sisodiyadheeraj71@gmail.com</string>
+    <string name="app_user_email_password">9250635603</string>
+    <string name="assignment_help_">Assignment Help !</string>
+    <string name="register_here_">Register Here !</string>
+    <string name="email_id">Email ID</string>
+    <string name="all_rights_reserved_">All Rights Reserved ?</string>
+    <string name="GPSAlertDialogMessage">GPSAlertDialogMessage</string>
+    <string name="GPSAlertDialogTitle">GPSAlertDialogTitle</string>
+    <string name="cancel">cancel</string>
+
+
+
+
+    <string name="chat_fragment_title">Chat (fragment)</string>
+    <string name="button_no_config">Chat (no config)</string>
+    <string name="button_optional_pre_chat_activity">Chat (all fields optional)</string>
+    <string name="button_requred_pre_chat_activity">Chat (all fields required)</string>
+    <string name="button_no_pre_chat_form_activity">Chat (no pre-chat form)</string>
+    <string name="button_pre_set_data_activity">Chat (pre-set data)</string>
+    <string name="button_chat_fragment">Chat (fragment)</string>
+    <string name="button_account_key">Update account key</string>
+    <string name="hint_account_key">Update account key</string>
+    <string name="error_account_key">please enter the account key</string>
+    <string name="account_key_confirm">Chat reinitialized with new account key</string>
+
+
+
+</resources>

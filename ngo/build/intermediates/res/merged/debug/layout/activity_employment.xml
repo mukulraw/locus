@@ -1,0 +1,138 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@drawable/bg"
+    
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.example.ngo.Employment_Support" >
+    
+    
+    <TextView
+        android:id="@+id/TextView02"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/TextView03"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="65dp"
+        android:text="8860353535"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="#3498db" />
+
+    <TextView
+        android:id="@+id/TextView03"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/TextView02"
+        android:layout_alignLeft="@+id/TextView01"
+        android:text="info@soscareindia.org "
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="#3498db" />
+
+    <TextView
+        android:id="@+id/TextView01"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/TextView03"
+        android:layout_alignLeft="@+id/TextView6"
+        android:text="SoS care india"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="#65d269" />
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="39dp"
+        android:text="EDUCATION NGO"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="#3498db"
+        android:textSize="30sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/TextView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/TextView01"
+        android:layout_alignLeft="@+id/TextView7"
+        android:layout_marginBottom="34dp"
+        android:text="http://capfoundation.org"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="#3498db" />
+
+    <TextView
+        android:id="@+id/TextView7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/TextView6"
+        android:layout_alignLeft="@+id/TextView5"
+        android:text="Ph: +91-40-2354 0019 / 1763 "
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="#3498db" />
+
+    <View
+        android:id="@+id/view1"
+        android:layout_width="fill_parent"
+        android:layout_height="1dip"
+        android:layout_above="@+id/TextView01"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="16dp"
+        android:background="#000000" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/view2"
+        android:layout_below="@+id/textView1"
+        android:layout_marginTop="18dp"
+        android:text="Yuva parivartan"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="#65d269" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textView2"
+        android:layout_below="@+id/textView2"
+        android:text="Tel +91 (22) 2647 4381 | 26479189 "
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="#3498db" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textView3"
+        android:layout_below="@+id/textView3"
+        android:text="info@yuvaparivartan.org"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="#3498db" />
+
+    <View
+        android:id="@+id/view2"
+        android:layout_width="fill_parent"
+        android:layout_height="1dip"
+        android:layout_above="@+id/TextView5"
+        android:layout_alignLeft="@+id/view1"
+        android:layout_marginBottom="15dp"
+        android:background="#000000" />
+
+    <TextView
+        android:id="@+id/TextView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/TextView7"
+        android:layout_alignLeft="@+id/view2"
+        android:text="Cap foundation india"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="#65d269" />
+
+</RelativeLayout><!-- From: file:/D:/android/androidStudioWorkSpace/Locus/ngo/src/main/res/layout/activity_employment.xml -->

@@ -1,0 +1,84 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@drawable/bg"
+    
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".Admine" >
+
+     <Button
+         android:id="@+id/button5"
+         style="?android:attr/buttonStyleSmall"
+         android:layout_width="100dp"
+         android:layout_height="100dp"
+         android:layout_alignLeft="@+id/textView1"
+         android:layout_below="@+id/textView1"
+         android:layout_marginTop="35dp"
+         android:background="@drawable/admin" />
+
+     <Button
+         android:id="@+id/button1"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_alignParentLeft="true"
+         android:layout_alignParentRight="true"
+         android:layout_below="@+id/button5"
+         android:layout_marginTop="18dp"
+         android:background="#FFFFCC"
+         android:onClick="onUserdata"
+         android:text="Users Data"
+         android:textColor="#0000ff" />
+
+     <Button
+         android:id="@+id/button2"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_alignLeft="@+id/button1"
+         android:layout_alignParentRight="true"
+         android:layout_below="@+id/button1"
+         android:layout_marginTop="15dp"
+         android:background="#99FF33"
+         android:onClick="onPostinformationdata"
+         android:text="Post Information Data"
+         android:textColor="#0000ff" />
+
+     <Button
+         android:id="@+id/button3"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_alignLeft="@+id/button2"
+         android:layout_alignRight="@+id/button2"
+         android:layout_below="@+id/button2"
+         android:layout_marginTop="22dp"
+         android:textColor="#0000ff"
+         android:onClick="onMakedonation"
+         android:background="#FFFF99" 
+         android:text="Donation Data" />
+
+         <Button
+             android:id="@+id/button6"
+             style="?android:attr/buttonStyleSmall"
+             android:layout_width="75dp"
+             android:layout_height="40dp"
+             android:onClick="onLogout"
+             android:layout_alignLeft="@+id/button1"
+             android:layout_alignParentTop="true"
+             android:background="@drawable/logout" />
+
+         <TextView
+             android:id="@+id/textView1"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_alignBaseline="@+id/button6"
+             android:layout_alignBottom="@+id/button6"
+             android:layout_centerHorizontal="true"
+             android:text="Admin Panel"
+             android:textAppearance="?android:attr/textAppearanceMedium"
+             android:textColor="#0000ff" />
+     
+</RelativeLayout>
+<!-- From: file:/D:/android/androidStudioWorkSpace/Locus/ngo/src/main/res/layout/activity_admine.xml -->

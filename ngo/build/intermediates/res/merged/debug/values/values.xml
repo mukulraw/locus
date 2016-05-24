@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- From: file:/D:/android/androidStudioWorkSpace/Locus/ngo/src/main/res/values/strings.xml -->
+    <eat-comment/>
+    <string-array name="brew_array">
+        <item>Food</item>
+        <item>Shelter</item>
+        <item>Clothes</item>
+        <item>Others</item>
+    </string-array>
+    <!-- From: file:/D:/android/androidStudioWorkSpace/Locus/ngo/src/main/res/values/dimens.xml -->
+    <eat-comment/>
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <!-- From: file:/D:/android/androidStudioWorkSpace/Locus/ngo/src/main/res/values/strings.xml -->
+    <eat-comment/>
+    <string name="action_settings">Settings</string>
+    <string name="app_name">NGO</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="spnr_donation_type">Choose Donation Type</string>
+    <string name="title_activity_admine">Admine</string>
+    <string name="title_activity_adminpage">Adminpage</string>
+    <string name="title_activity_all">All</string>
+    <string name="title_activity_animal">Animal</string>
+    <string name="title_activity_applicationform">Applicationform</string>
+    <string name="title_activity_broswer">Broswer</string>
+    <string name="title_activity_cemra">Cemra</string>
+    <string name="title_activity_contactus">Contactus</string>
+    <string name="title_activity_demo">Demo</string>
+    <string name="title_activity_donation">Donation</string>
+    <string name="title_activity_donation1">Donation1</string>
+    <string name="title_activity_education">Education</string>
+    <string name="title_activity_elderlysupport">Elderlysupport</string>
+    <string name="title_activity_email">Email</string>
+    <string name="title_activity_emergencyhelp">Emergencyhelp</string>
+    <string name="title_activity_employment">Employment</string>
+    <string name="title_activity_faq">Faq</string>
+    <string name="title_activity_firstpage">Firstpage</string>
+    <string name="title_activity_heathcare">Heathcare</string>
+    <string name="title_activity_helpline">Helpline</string>
+    <string name="title_activity_index">Helping Hands</string>
+    <string name="title_activity_list_item">List_item</string>
+    <string name="title_activity_location">Location</string>
+    <string name="title_activity_login1">Login</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="title_activity_makedonation">Makedonation</string>
+    <string name="title_activity_map">Map</string>
+    <string name="title_activity_needy">Needy</string>
+    <string name="title_activity_option">Option</string>
+    <string name="title_activity_pickdrop">Pickdrop</string>
+    <string name="title_activity_post__information">Post_Information</string>
+    <string name="title_activity_postinformationdata">Postinformationdata</string>
+    <string name="title_activity_profile">Profile</string>
+    <string name="title_activity_roughf">Roughf</string>
+    <string name="title_activity_sendmassage">Sendmassage</string>
+    <string name="title_activity_test">Test</string>
+    <string name="title_activity_userdata">Userdata</string>
+    <string name="title_activity_volunteer">Volunteer</string>
+    <string name="title_activity_volunteerf">Volunteerf</string>
+    <string name="title_activity_volunteertype">Volunteertype</string>
+    <string name="title_activity_webbroswer">Webbroswer</string>
+    <string name="title_activity_youraddress">Youraddress</string>
+    <string name="txt_hint_cancel">Cancel</string>
+    <string name="txt_hint_email">abc@xyz.com</string>
+    <string name="txt_hint_first_name">First Name</string>
+    <string name="txt_hint_password">Password</string>
+    <string name="txt_hint_title_registration">Register</string>
+    <!-- From: file:/D:/android/androidStudioWorkSpace/Locus/ngo/src/main/res/values/styles.xml -->
+    <eat-comment/>
+    <style name="AppBaseTheme" parent="android:Theme.Light">
+        <!--
+            Theme customizations available in newer API levels can go in
+            res/values-vXX/styles.xml, while customizations related to
+            backward-compatibility can go here.
+        -->
+    </style>
+    <style name="AppTheme" parent="AppBaseTheme">
+        <!-- All customizations that are NOT specific to a particular API-level can go here. -->
+    </style>
+    <style name="customSpinnerItem" parent="android:Widget.TextView.SpinnerItem">
+        <item name="android:textAppearance">@style/customTextAppearanceSpinnerItem</item>
+    </style>
+    <style name="customTextAppearanceSpinnerItem" parent="android:TextAppearance.Widget.TextView.SpinnerItem">
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+</resources>

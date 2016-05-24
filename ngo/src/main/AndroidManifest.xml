@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.ngo"
+    android:versionCode="1"
+    android:versionName="1.0" >
+    
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+        <activity
+            android:name="com.example.ngo.Index"
+            android:label="@string/title_activity_index"
+            android:screenOrientation="portrait" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.example.ngo.Login1"
+            android:label="@string/title_activity_login1"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.example.ngo.Register"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.example.ngo.Firstpage"
+            android:label="@string/title_activity_firstpage"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.example.ngo.Faq"
+            android:label="@string/title_activity_faq"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.example.ngo.Donation"
+            android:label="@string/title_activity_donation"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.example.ngo.Volunteer"
+            android:label="@string/title_activity_volunteer"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.example.ngo.Emergencyhelp"
+            android:label="@string/title_activity_emergencyhelp"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.example.ngo.Test"
+            android:label="@string/title_activity_test"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.example.ngo.Donation1"
+            android:label="@string/title_activity_donation1"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.example.ngo.Pickdrop"
+            android:label="@string/title_activity_pickdrop"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.example.ngo.Contactus"
+            android:label="@string/title_activity_contactus"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.example.ngo.Youraddress"
+            android:label="@string/title_activity_youraddress"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.example.ngo.Needy"
+            android:label="@string/title_activity_needy"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.example.ngo.Education"
+            android:label="@string/title_activity_education"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.example.ngo.Heathcare"
+            android:label="@string/title_activity_heathcare"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.example.ngo.Elderlysupport"
+            android:label="@string/title_activity_elderlysupport"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.example.ngo.Animal"
+            android:label="@string/title_activity_animal"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.example.ngo.Employment"
+            android:label="@string/title_activity_employment"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.example.ngo.Volunteertype"
+            android:label="@string/title_activity_volunteertype"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.example.ngo.Applicationform"
+            android:label="@string/title_activity_applicationform"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.example.ngo.Webbroswer"
+            android:label="@string/title_activity_webbroswer" >
+        </activity>
+        <activity
+            android:name="com.example.ngo.Cemra"
+            android:label="@string/title_activity_cemra" >
+        </activity>
+        <activity
+            android:name="com.example.ngo.Sendmassage"
+            android:label="@string/title_activity_sendmassage" >
+        </activity>
+        <activity
+            android:name="com.example.ngo.MainActivity"
+            android:label="@string/title_activity_main" >
+
+            <!--
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+
+
+
+
+
+
+
+
+
+            -->
+        </activity>
+        <activity
+            android:name="com.example.ngo.Email"
+            android:label="@string/title_activity_email" >
+        </activity>
+        <activity
+            android:name="com.example.ngo.Helpline"
+            android:label="@string/title_activity_helpline" >
+        </activity>
+        <activity
+            android:name="com.example.ngo.Adminpage"
+            android:label="@string/title_activity_adminpage" >
+        </activity>
+        <activity
+            android:name="com.example.ngo.Admine"
+            android:label="@string/title_activity_admine" >
+        </activity>
+        <activity
+            android:name="com.example.ngo.Profile"
+            android:label="@string/title_activity_profile" >
+        </activity>
+        <activity
+            android:name="com.example.ngo.Post_Information"
+            android:label="@string/title_activity_post__information" >
+        </activity>
+        <activity
+            android:name="com.example.ngo.Option"
+            android:label="@string/title_activity_option" >
+        </activity>
+        <activity
+            android:name="com.example.ngo.Broswer"
+            android:label="@string/title_activity_broswer" >
+        </activity>
+        <activity android:name="com.example.ngo.FilePicker" >
+        </activity>
+        <activity
+            android:name="com.example.ngo.List_item"
+            android:label="@string/title_activity_list_item" >
+        </activity>
+        <activity
+            android:name="com.example.ngo.Userdata"
+            android:label="@string/title_activity_userdata" >
+        </activity>
+        <activity
+            android:name="com.example.ngo.Postinformationdata"
+            android:label="@string/title_activity_postinformationdata" >
+        </activity>
+        <activity
+            android:name="com.example.ngo.Makedonation"
+            android:label="@string/title_activity_makedonation" >
+        </activity>
+        <activity
+            android:name="com.example.ngo.Map"
+            android:label="@string/title_activity_map" >
+        </activity>
+    </application>
+
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.SEND_SMS" />
+    <uses-permission android:name="android.permission.RECEIVE_SMS" />
+
+</manifest>

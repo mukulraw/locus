@@ -1,0 +1,110 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    
+    
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg"
+    
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".Helping Hands">
+
+    <Button
+        android:id="@+id/like"
+        android:layout_width="90dp"
+        android:layout_height="80dp"
+        android:layout_marginLeft="-5dp"
+        android:layout_marginTop="190dp"
+        android:background="@drawable/register"
+        android:onClick="onRegister" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="90dp"
+        android:layout_height="80dp"
+        android:layout_marginLeft="104dp"
+        android:layout_marginTop="190dp"
+        android:background="@drawable/login"
+        android:onClick="onLogin" />
+    
+     <Button
+         android:id="@+id/button3"
+         android:layout_width="90dp"
+         android:layout_height="80dp"
+         android:layout_marginLeft="214dp"
+         android:layout_marginTop="190dp"
+         android:background="@drawable/volunteer"
+         android:onClick="onVolunteer" />
+     
+	<Button
+	    android:id="@+id/button4"
+	    android:layout_width="90dp"
+	    android:layout_height="80dp"
+	    android:layout_marginLeft="-5dp"
+	    android:layout_marginTop="300dp"
+	    android:background="@drawable/donation"
+        android:onClick="onMakeDonation" />
+
+    <Button
+        android:id="@+id/button5"
+        android:layout_width="90dp"
+        android:layout_height="80dp"
+        android:layout_marginLeft="104dp"
+        android:layout_marginTop="300dp"
+        android:background="@drawable/help"
+        android:onClick="onEmergency" />
+        
+    
+     <Button
+         android:id="@+id/button6"
+         android:layout_width="90dp"
+         android:layout_height="80dp"
+         android:layout_marginLeft="214dp"
+         android:layout_marginTop="300dp"
+         android:background="@drawable/faq"
+         android:onClick="onFaq" />
+
+<!--      <TextView
+         android:id="@+id/textView1"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_alignLeft="@+id/textView2"
+         android:layout_below="@+id/textView2"
+         android:text="Donate from anywhere at anytime"
+         android:textSize="20sp"
+         android:textColor="#FFFFFF" />
+      -->
+     
+     
+        <TextView
+    android:text="Donate from anywhere at anytime........"
+    android:id="@+id/MarqueeText" 
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content" 
+    android:singleLine="true"
+    android:ellipsize="marquee" 
+    android:marqueeRepeatLimit="marquee_forever"
+    android:scrollHorizontally="true" 
+    android:paddingLeft="15dip" 
+    android:paddingRight="15dip" 
+    android:focusable="true" 
+    android:focusableInTouchMode="true" 
+    android:textColor="#99FF00"
+    android:textSize="20sp"
+    android:layout_marginTop="110dp"
+    android:freezesText="true"/>
+
+        <Button
+            android:id="@+id/button7"
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="150dp"
+            android:layout_height="130dp"
+            android:layout_marginTop="-39dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignRight="@+id/button2"
+            android:background="@drawable/dheeraj" />
+      
+</RelativeLayout><!-- From: file:/D:/android/androidStudioWorkSpace/Locus/ngo/src/main/res/layout/activity_index.xml -->

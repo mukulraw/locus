@@ -1,0 +1,141 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.example.ngo.HealthCare" >
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:text="Health &amp; Care NGO Contact Details"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="#3498db"
+        android:textSize="30sp" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textView1"
+        android:layout_below="@+id/textView1"
+        android:layout_marginTop="18dp"
+        android:text="Ratna Nidhi Charitable Trust"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="#65d269"
+         />
+
+    
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/TextView03"
+        android:layout_below="@+id/textView2"
+        android:text="+912223898930"
+        android:textColor="#65d269"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textView2"
+        android:layout_below="@+id/textView3"
+        android:textColor="#65d269"
+        android:text="info@ratnanidhi.org"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <TextView
+        android:id="@+id/TextView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/TextView5"
+        android:layout_below="@+id/TextView5"
+        android:textColor="#65d269"
+        android:text="http://actionforindia.org"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <View
+        android:id="@+id/view1"
+        android:layout_width="fill_parent"
+        android:layout_height="1dip"
+        android:layout_alignLeft="@+id/textView4"
+        android:layout_below="@+id/textView4"
+        android:layout_marginTop="15dp"
+        android:background="#000000" />
+
+    <TextView
+        android:id="@+id/TextView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/textView4"
+        android:layout_below="@+id/view1"
+        android:layout_marginTop="14dp"
+        android:text="Action for india"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="#65d269"
+         />
+
+    <TextView
+        android:id="@+id/TextView7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/TextView6"
+        android:layout_below="@+id/TextView6"
+        android:textColor="#65d269"
+        android:text="info@actionforindia.org"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <TextView
+        android:id="@+id/TextView03"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/TextView7"
+        android:layout_below="@+id/TextView7"
+        android:layout_marginTop="69dp"
+        android:textColor="#65d269"
+        android:text="info@smilefoundationindia.org "
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <TextView
+        android:id="@+id/TextView01"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/TextView03"
+        android:layout_alignLeft="@+id/TextView03"
+        android:layout_marginBottom="22dp"
+        android:text="Smile Foundation for India"
+        android:textAppearance="?android:attr/textAppearanceMedium" 
+        android:textColor="#65d269"
+        />
+
+    <View
+        android:id="@+id/View01"
+        android:layout_width="fill_parent"
+        android:layout_height="1dip"
+        android:layout_above="@+id/TextView01"
+        android:layout_alignLeft="@+id/view1"
+        android:layout_marginBottom="20dp"
+        android:background="#000000" />
+
+    <TextView
+        android:id="@+id/TextView02"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/TextView03"
+        android:layout_below="@+id/TextView03"
+        android:textColor="#65d269"
+        android:text="+91-11-43123700"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+</RelativeLayout><!-- From: file:/D:/android/androidStudioWorkSpace/Locus/ngo/src/main/res/layout/activity_heathcare.xml -->

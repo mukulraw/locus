@@ -1,0 +1,194 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@drawable/bg"
+    
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Register" >
+
+    <ScrollView
+        
+        
+        android:id="@+id/scrollholder"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        
+        <LinearLayout 
+        android:orientation="vertical"    
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+            <Button
+                android:id="@+id/button5"
+                style="?android:attr/buttonStyleSmall"
+                android:layout_width="130dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="80dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/reg" />
+     
+      <EditText
+        android:id="@+id/editText1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView1"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="14dp"
+        android:ems="10"
+        android:hint="First Name"
+        android:textColorHint="#65d269"
+        android:singleLine="true">
+
+        <requestFocus />
+    </EditText>
+
+    <EditText
+        android:id="@+id/editText2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/editText1"
+        android:layout_below="@+id/editText1"
+        android:ems="10"
+        android:hint="Last Name"
+        android:textColorHint="#65d269"
+        android:singleLine="true" />
+
+    <EditText
+        android:id="@+id/editText3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/editText2"
+        android:layout_below="@+id/editText2"
+        android:ems="10"
+        android:hint="Address"
+        android:textColorHint="#65d269"
+        android:singleLine="true" />
+
+    <EditText
+        android:id="@+id/editText4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/editText3"
+        android:layout_below="@+id/editText3"
+        android:ems="10"
+        android:digits="0123456789"
+        android:numeric="integer" 
+        android:hint="Mobile +91"
+        android:textColorHint="#65d269"
+        android:singleLine="true"
+        android:inputType="phone"
+        android:maxLength="10" />
+
+    <EditText
+        android:id="@+id/editText5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/editText4"
+        android:layout_below="@+id/editText4"
+        android:ems="10"
+        android:hint="Email"
+        android:inputType="textEmailAddress"
+        android:textColorHint="#65d269"
+        android:singleLine="true" />
+
+    <EditText
+        android:id="@+id/editText6"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/editText5"
+        android:layout_below="@+id/editText5"
+        android:ems="10"
+        android:hint="Password"
+        android:inputType="textPassword"
+        android:textColorHint="#65d269"
+        android:selectAllOnFocus="false"
+        android:singleLine="true"
+        android:maxLength="10" />
+
+    <TextView
+    android:id="@+id/textView3"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:textColor="#3498db"
+    android:text="Volunteer" />
+
+    
+    <RadioGroup
+        
+        android:id="@+id/radioGroupSubject"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/editText6"
+        android:layout_below="@+id/editText6" >
+     
+        
+        <RadioButton
+            android:id="@+id/radioBtnRegular"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#E81A0C"
+            android:text="Regular" />
+
+        <RadioButton
+            android:id="@+id/radioBtnOccasionaly"
+            android:layout_width="wrap_content"
+            android:textColor="#E81A0C"
+            android:layout_height="wrap_content"
+            android:text="Occasionaly" />
+
+        </RadioGroup>
+
+    
+    <TextView
+    android:id="@+id/textView3"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:textColor="#3498db"
+    android:text="Gender" />
+
+    
+    <RadioGroup
+        android:id="@+id/radioGroupGender"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/radioGroupSubject">
+	
+     
+        
+        <RadioButton
+            android:id="@+id/radioBtnMale"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#E81A0C"
+            android:text="Female"   />
+
+        <RadioButton
+            android:id="@+id/radioBtnFemale"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#E81A0C"
+            android:text="Male" />
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="onRegister"
+        android:text="@string/txt_hint_title_registration"
+        android:textColor="#3498db" />
+
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="335dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="21dp"
+        android:layout_marginRight="68dp"
+        android:onClick="onCancel"
+        android:text="@string/txt_hint_cancel"
+        android:textColor="#E81A0C" />
+        
+        </LinearLayout>
+        </ScrollView>
+    
+</RelativeLayout>

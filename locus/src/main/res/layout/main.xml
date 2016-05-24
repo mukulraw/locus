@@ -1,0 +1,320 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rootHolder"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    android:background="@drawable/cool1"
+    >
+
+
+    <ScrollView
+       android:id="@+id/scrollholder"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:layout_below="@id/header"
+       android:fillViewport="true" >
+
+       <LinearLayout
+           android:id="@+id/LinearLayout"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:orientation="vertical"
+           android:layout_marginLeft="@dimen/activity_horizontal_margin"
+           android:layout_marginRight="@dimen/activity_horizontal_margin">
+
+
+           <EditText
+               android:id="@+id/et_Name"
+               android:layout_width="fill_parent"
+               android:layout_gravity="center"
+               android:layout_height="match_parent"
+               android:layout_marginTop="3dp"
+               android:background="@drawable/gradient"
+               android:ems="10"
+               android:hint="Your Name*"
+               android:textColorHint="#B6B6B4"
+               android:textColor="#B6B6B4"
+               android:inputType="text"
+               android:padding="7dip"
+               android:textSize="13sp" />
+
+
+     <EditText
+         android:id="@+id/et_Email"
+         android:layout_height="wrap_content"
+         android:background="@drawable/gradient"
+         android:ems="10"
+         android:layout_width="match_parent"
+         android:layout_gravity="center"
+         android:textSize="13sp"
+         android:maxLength="10"
+         android:textColorHint="#B6B6B4"
+         android:textColor="#B6B6B4"
+         android:layout_marginTop="3dp"
+         android:hint="Your Mail*"
+         android:inputType="text"
+         android:padding="7dip" />
+
+     <EditText
+         android:id="@+id/et_Phone"
+         android:layout_height="wrap_content"
+         android:background="@drawable/gradient"
+         android:ems="10"
+         android:layout_width="match_parent"
+         android:textColorHint="#B6B6B4"
+         android:textColor="#B6B6B4"
+         android:layout_gravity="center"
+         android:textSize="13sp"
+         android:layout_marginTop="3dp"
+         android:hint="Your Phone*"
+         android:inputType="text"
+         android:padding="7dip" />
+
+         <Spinner
+         android:id="@+id/spnr_Country"
+         android:layout_height="wrap_content"
+         android:background="@drawable/gradient"
+         android:popupBackground="#FFFFFF"
+         android:layout_width="match_parent"
+         android:layout_gravity="center"
+         android:padding="5dip"
+         android:layout_marginTop="3dp"
+         />
+
+
+    <Spinner
+         android:id="@+id/spnr_Subject"
+         android:layout_height="wrap_content"
+         android:background="@drawable/gradient"
+         android:popupBackground="#FFFFFF"
+         android:padding="5dip"
+         android:layout_width="match_parent"
+         android:layout_gravity="center"
+         android:layout_marginTop="3dp"
+         />
+
+    <Spinner
+         android:id="@+id/spnr_Grade"
+         android:layout_height="wrap_content"
+         android:background="@drawable/gradient"
+         android:popupBackground="#FFFFFF"
+         android:layout_width="match_parent"
+         android:padding="5dip"
+         android:layout_gravity="center"
+         android:layout_marginTop="3dp"
+         />
+
+
+    <Spinner
+         android:id="@+id/spnr_Reference"
+         android:layout_height="wrap_content"
+         android:background="@drawable/gradient"
+         android:popupBackground="#FFFFFF"
+         android:padding="5dip"
+         android:layout_width="match_parent"
+         android:layout_gravity="center"
+         android:layout_marginTop="3dp"
+          />
+
+
+           <EditText
+         android:id="@+id/et_Lastdateofsubmission"
+         android:layout_height="wrap_content"
+         android:background="@drawable/gradient"
+         android:ems="10"
+         android:layout_width="match_parent"
+         android:layout_gravity="center"
+         android:textSize="13sp"
+         android:layout_marginTop="3dp"
+         android:textColorHint="#B6B6B4"
+         android:textColor="#B6B6B4"
+         android:hint="Last Date Of Submission"
+         android:inputType="date"
+         android:padding="7dip" />
+
+
+
+           <EditText
+          android:id="@+id/et_Textarea"
+          android:inputType="textMultiLine"
+          android:lines="6"
+          android:minLines="6"
+          android:layout_marginTop="3dp"
+          android:textSize="13sp"
+          android:background="@drawable/gradient"
+          android:textColor="#B6B6B4"
+          android:gravity="top|left"
+          android:maxLines="8"
+          android:layout_width="match_parent"
+          android:layout_gravity="center"
+          android:layout_height="wrap_content"
+          android:scrollbars="vertical"/>
+
+           <LinearLayout
+               android:id="@+id/LinearLayout01"
+               android:layout_width="wrap_content"
+               android:layout_height="match_parent"
+               android:orientation="horizontal">
+
+
+           <Button
+               android:id="@+id/browse"
+               android:layout_width="100dp"
+               android:layout_height="35dp"
+               android:layout_below="@+id/scrollholder"
+               android:gravity="center"
+               android:layout_marginTop="3dp"
+               android:text="Browse..."
+               android:textSize="13dp" />
+
+           <TextView
+               android:id="@+id/file_path"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:layout_marginLeft="25dp"
+               android:layout_marginTop="2dp"
+               android:layout_toRightOf="@+id/browse"
+               android:text="No file selected."
+               android:textAppearance="?android:attr/textAppearanceSmall" />
+
+               </LinearLayout>
+
+           <LinearLayout
+               android:id="@+id/LinearLayout011"
+               android:layout_width="wrap_content"
+               android:layout_height="match_parent"
+               android:orientation="horizontal">
+
+
+               <ImageButton
+                   android:layout_width="62dp"
+                   android:layout_height="52dp"
+                   android:layout_gravity="center"
+                   android:background="@drawable/index"
+                   android:id="@+id/camerabutton" />
+
+
+               <TextView
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:layout_weight="1"
+                   android:layout_toRightOf="@+id/browse"
+                   android:layout_marginLeft="61dp"
+                   android:layout_marginTop="15dp"
+                   android:text="Take a Snapshot"
+                   android:textAppearance="?android:attr/textAppearanceSmall"
+                   android:id="@+id/cameraview" />
+
+
+
+           </LinearLayout>
+
+
+
+
+
+
+           <EditText
+               android:id="@+id/et_Expectedquoteinusd"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:background="@drawable/gradient"
+               android:ems="10"
+               android:textColorHint="#B6B6B4"
+               android:textColor="#B6B6B4"
+               android:layout_marginTop="3dp"
+               android:layout_gravity="center"
+               android:hint="Expected Quote in USD"
+               android:inputType="text"
+               android:padding="7dip"
+               android:textSize="13sp"
+               />
+
+
+
+
+           <Button
+               android:id="@+id/btn_Submit"
+               style="?android:attr/buttonStyleSmall"
+               android:layout_width="fill_parent"
+               android:layout_height="fill_parent"
+               android:gravity="center"
+               android:layout_alignParentBottom="true"
+               android:layout_marginTop="5dp"
+               android:onClick="onSubmit"
+               android:background="#fbbc05"
+               android:text="Submit" />
+
+
+
+       </LinearLayout>
+
+    </ScrollView>
+
+
+
+
+
+    <!-- Header aligned to top -->
+
+    <RelativeLayout
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:background="#6699FF"
+        android:gravity="center" >
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:text="Submit your Requirements"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp" />
+
+
+        <TextView
+            android:id="@+id/data"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="18dp"
+            android:text="data"
+            android:textColor="#6699FF"
+            android:textSize="23sp"
+            android:visibility="gone"/>
+
+
+
+        <EditText
+            android:id="@+id/userlocation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="18dp"
+            android:text="location"
+            android:textColor="#6699FF"
+            android:textSize="23sp"
+            android:visibility="gone"
+            />
+
+
+        <EditText
+            android:id="@+id/address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="18dp"
+            android:text="location"
+            android:textColor="#6699FF"
+            android:textSize="23sp"
+            android:visibility="gone"
+            />
+
+
+
+
+    </RelativeLayout>
+
+</RelativeLayout>

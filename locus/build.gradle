@@ -1,0 +1,52 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 23
+    buildToolsVersion '23.0.3'
+    useLibrary 'org.apache.http.legacy'
+
+
+    defaultConfig {
+        applicationId "com.app.locus.assignment"
+        minSdkVersion 15
+        targetSdkVersion 23
+        versionCode 7
+        versionName "1.2.0.1"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+
+
+
+
+
+    productFlavors {
+    }
+}
+
+
+repositories {
+    maven {
+        // Zendesk public repo
+        url 'https://zendesk.artifactoryonline.com/zendesk/repo/'
+    }
+}
+
+
+apply {
+   // apply from: "http://gradle.artifactoryonline.com/gradle/plugins/org/jfrog/buildinfo/build-info-extractor-gradle/1.0.1/artifactoryplugin-1.0.1.gradle"
+}
+
+dependencies {
+    // public repo Chat SDK dependency
+    compile group: 'com.zopim.android', name: 'sdk', version: '1.2.1.1', changing: false
+    compile 'com.android.support:support-v4:23.4.0'
+    compile 'com.android.support:appcompat-v7:23.4.0'
+    compile 'com.google.android.gms:play-services-appindexing:9.0.0'
+}

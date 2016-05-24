@@ -1,0 +1,98 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+   android:background="@drawable/bg"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".Donation1" >
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:text="Donation"
+        android:textColor="#3498db"
+        android:textSize="40sp"
+        android:textStyle="bold" />
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="54dp"
+        android:layout_height="54dp"
+        android:layout_alignBottom="@+id/button4"
+        android:layout_alignLeft="@+id/imageView3"
+        android:src="@drawable/tools" />
+
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="210dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/textView1"
+        android:layout_marginTop="32dp"
+        android:text="Money Donation" 
+        android:textColor="#ff895d"/>
+
+    <Button
+        android:id="@+id/button4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/button3"
+        android:layout_alignRight="@+id/button3"
+        android:layout_below="@+id/button3"
+        android:layout_marginTop="37dp"
+        android:text="Other Utilites" />
+
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/button2"
+        android:layout_alignRight="@+id/button2"
+        android:layout_below="@+id/button2"
+        android:layout_marginTop="32dp"
+        android:text="Clothes" 
+        android:textColor="#f79f24"/>
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="54dp"
+        android:layout_height="54dp"
+        android:layout_alignTop="@+id/button3"
+        android:layout_toLeftOf="@+id/textView1"
+        android:src="@drawable/cloth" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="54dp"
+        android:layout_height="54dp"
+        android:layout_alignTop="@+id/button2"
+        android:layout_toLeftOf="@+id/textView1"
+        android:src="@drawable/food" />
+
+    <ImageView
+        android:id="@+id/imageView1"
+        android:layout_width="54dp"
+        android:layout_height="54dp"
+        android:layout_alignLeft="@+id/imageView2"
+        android:layout_alignTop="@+id/button1"
+        android:src="@drawable/donate" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/button1"
+        android:layout_alignRight="@+id/button1"
+        android:layout_below="@+id/imageView1"
+        android:layout_marginTop="19dp"
+        android:text="Food" 
+        android:textColor="#65d269"/>
+
+</RelativeLayout><!-- From: file:/D:/android/androidStudioWorkSpace/Locus/ngo/src/main/res/layout/activity_donation1.xml -->

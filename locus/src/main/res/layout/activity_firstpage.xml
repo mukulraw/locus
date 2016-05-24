@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/cool1" >
+
+    <!-- Header aligned to top -->
+
+    <!-- Footer aligned to bottom -->
+
+    <RelativeLayout
+        android:id="@+id/footer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="#666666"
+        android:gravity="center" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:text="All Rights Reserved ?"
+            android:textColor="#FFFFFF"
+            android:textSize="15sp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:background="#6699FF"
+        android:gravity="center" >
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:layout_marginRight="-52dp"
+            android:text="User Name"
+            android:textColor="#FFFFFF"
+            android:textSize="23sp" />
+
+
+        <Button
+            android:id="@+id/button52"
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="11dp"
+            android:layout_marginTop="24dp"
+            android:background="@drawable/lo"
+            android:onClick="onLogout" />
+
+    </RelativeLayout>
+
+ <Button
+     android:id="@+id/button3"
+     android:layout_width="41dp"
+     android:layout_height="61dp"
+     android:layout_alignLeft="@+id/button2"
+     android:layout_alignRight="@+id/button2"
+     android:layout_centerVertical="true"
+     android:background="#66CCFF"
+     android:gravity="center"
+     android:onClick="onAssignment"
+     android:text="Assignment"
+     android:textColor="#FFFFFF"
+     android:textSize="21sp" />
+
+ <Button
+     android:id="@+id/button5"
+     style="?android:attr/buttonStyleSmall"
+     android:layout_width="55dp"
+     android:layout_height="65dp"
+     android:gravity="center"
+     android:layout_alignBottom="@+id/button3"
+     android:layout_alignLeft="@+id/button3"
+     android:background="@drawable/assign" />
+
+ <Button
+     android:id="@+id/button2"
+     style="?android:attr/buttonStyleSmall"
+     android:layout_width="339dp"
+     android:layout_height="61dp"
+     android:layout_below="@+id/header"
+     android:layout_centerHorizontal="true"
+     android:layout_marginTop="38dp"
+     android:background="@drawable/hw" />
+
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/buttonNoConfig"
+        android:onClick="buttonNoConfig"
+        android:background="@drawable/livechat"
+        android:layout_below="@+id/button3"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="60dp" />
+
+
+</RelativeLayout>

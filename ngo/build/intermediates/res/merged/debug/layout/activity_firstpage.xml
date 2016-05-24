@@ -1,0 +1,128 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+      android:background="@drawable/bg"
+    
+    
+    
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".Firstpage" >
+    
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/textView1"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="120dp"
+        android:background="#FFFF99"
+        android:text="Post Information"
+        android:textColor="#0000ff" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/button1"
+        android:layout_alignRight="@+id/button1"
+        android:layout_below="@+id/button1"
+        android:layout_marginTop="20dp"
+        android:background="#28e7b2"
+        android:text="NGO"
+        android:textColor="#0000ff" />
+
+   <!-- 
+    
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/button2"
+        android:layout_alignRight="@+id/button2"
+        android:layout_below="@+id/button2"
+        android:layout_marginTop="19dp"
+        android:textColor="#0000ff"
+        android:background="#99FF33"
+        android:text="Donation" />
+
+   
+    
+ -->
+
+<!-- 
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/button1"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="93dp"
+        android:layout_marginTop="37dp"
+        android:textColor="#ff0000"
+        android:text="NGO"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+    
+ -->  
+        <ImageView
+        android:id="@+id/imageView1"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_below="@+id/textView1"
+        android:layout_centerHorizontal="true"
+         android:layout_marginTop="-25dp"
+        android:src="@drawable/dheeraj" />
+
+        <Button
+            android:id="@+id/button5"
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:layout_marginTop="-13dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignRight="@+id/button1"
+            android:background="@drawable/profile1" 
+            />
+           
+      <!--   
+        <Button
+        android:id="@+id/button2"
+        android:layout_width="90dp"
+        android:layout_height="80dp"
+        android:layout_marginLeft="104dp"
+        android:layout_marginTop="190dp"
+        android:background="@drawable/login"
+        android:onClick="onLogin" />
+    
+        
+        
+     -->
+
+         <Button
+             android:id="@+id/button6"
+             style="?android:attr/buttonStyleSmall"
+             android:layout_width="75dp"
+             android:layout_height="40dp"
+             android:layout_alignBottom="@+id/button6"
+             android:layout_marginTop="8dp"
+             android:layout_alignParentLeft="true"
+             android:background="@drawable/logout" />
+
+         <Button
+             android:id="@+id/button4"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_alignLeft="@+id/button2"
+             android:layout_alignRight="@+id/button2"
+             android:layout_below="@+id/button2"
+             android:layout_marginTop="20dp"
+             android:background="#FFFFCC"
+             android:text="Contact Us !"
+             android:textColor="#0000ff" />
+      
+</RelativeLayout><!-- From: file:/D:/android/androidStudioWorkSpace/Locus/ngo/src/main/res/layout/activity_firstpage.xml -->
