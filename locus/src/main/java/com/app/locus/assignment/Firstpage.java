@@ -78,18 +78,7 @@ public class Firstpage extends Activity {
 
 	}
 
-	/*
-	public void onBackPressed(){
-		finish();
-		Intent intent=new Intent(Firstpage.this,SplashActivity.class);
-		startActivity(intent);
-	}
 
-*/    /**
-     * Starts the chat with global config that was provided at init state via {@link com.zopim.android.sdk.api.ZopimChatApi#init(String)}
-     *
-     * @see com.zopim.sample.SampleApplication
-     */
     public void buttonNoConfig(View view) {
         startActivity(new Intent(this, ZopimChatActivity.class));
 

@@ -6,12 +6,7 @@
 
 
 
-        <ViewFlipper
-            android:id="@+id/viewflipper"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:autoStart="true"
-            android:flipInterval="2000" >
+
 
             <ImageView
                 android:layout_width="match_parent"
@@ -23,104 +18,45 @@
                 android:contentDescription="" />
 
 
-       <!--
-
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:maxHeight="375dp"
-                android:adjustViewBounds="true"
-                android:scaleType="fitXY"
-                android:src="@drawable/a22" />
-
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:adjustViewBounds="true"
-                android:maxHeight="375dp"
-                android:scaleType="fitXY"
-                android:src="@drawable/a33" />
--->
-        </ViewFlipper>
-
-
 
 
 
 
 
     <LinearLayout
-        android:id="@+id/bottomLay"
-        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:gravity="center"
+        android:layout_height="wrap_content"
+        android:weightSum="2"
         android:layout_alignParentBottom="true"
-        android:weightSum="2">
+        >
 
-        <RelativeLayout
-            android:orientation="horizontal"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:background="#6699FF"
-            android:id="@+id/login_lay"
-            android:layout_weight="1">
+        <Button
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:text="SIGN IN"
+            android:onClick="signin"
+            android:textColor="@android:color/white"
+            android:background="@android:color/holo_blue_dark"
+            android:layout_height="wrap_content" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="16sp"
-                android:textColor="#FFFFFF"
-                android:textStyle="bold"
-                android:text="SIGN IN"
-                android:layout_centerHorizontal="true"
-                android:layout_centerVertical="true"
-                android:id="@+id/login_txt" />
-        </RelativeLayout>
 
-        <RelativeLayout
-            android:orientation="horizontal"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:background="#666666"
-            android:id="@+id/register_lay"
-            android:layout_weight="1">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="16sp"
-                android:textColor="#FFFFFF"
-                android:textStyle="bold"
-                android:text="REGISTER"
-                android:layout_centerHorizontal="true"
-                android:layout_centerVertical="true"
-                android:id="@+id/register_txt" />
-        </RelativeLayout>
+        <Button
+            android:layout_width="0dp"
+            android:text="SIGN UP"
+            android:onClick="signup"
+            android:textColor="@android:color/white"
+            android:background="@android:color/darker_gray"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            />
 
     </LinearLayout>
 
 
-<!--
-
-    <ViewFlipper
-        android:id="@+id/viewflipper"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:autoStart="true"
-        android:background="@drawable/a33"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-
-        android:layout_above="@+id/bottomLay"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true">
 
 
-    </ViewFlipper>
 
--->
+
 
 
 </RelativeLayout>

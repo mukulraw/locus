@@ -31,43 +31,30 @@
         <!-- Footer aligned to bottom -->
 
     <ImageView
-        style="?android:attr/buttonStyleSmall"
         android:layout_width="match_parent"
-        android:layout_height="80dp"
-
+        android:layout_height="90dp"
         android:src="@drawable/hw"
-        android:scaleType="center"
+        android:scaleType="fitCenter"
         android:gravity="center" />
 
     <EditText
         android:id="@+id/et_userName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="22dp"
         android:ems="10"
         android:textStyle="normal"
-        android:textSize="24sp"
-        android:gravity="center"
-        android:drawableLeft="@drawable/lock"
+        android:layout_marginTop="10dp"
+        android:textSize="13sp"
+        android:drawableTint="@android:color/holo_blue_light"
+        android:drawableLeft="@android:drawable/ic_menu_info_details"
         android:hint="Screen Name"
         android:inputType="textPersonName"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"/>
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="60dp">
 
-        <Button
-            style="?android:attr/buttonStyleSmall"
-            android:layout_width="35dp"
-            android:layout_marginStart="25dp"
-            android:layout_centerVertical="true"
-            android:layout_height="35dp"
-            android:clickable="false"
-            android:layout_alignTop="@+id/et_password"
-            android:background="@drawable/user"
-            android:layout_marginLeft="25dp" />
+
+
 
     <EditText
         android:id="@+id/et_password"
@@ -75,14 +62,16 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:textStyle="normal"
-        android:textSize="24sp"
+        android:textSize="13sp"
+        android:layout_marginTop="10dp"
+        android:drawableLeft="@android:drawable/ic_lock_lock"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:gravity="center"
+
         android:hint="Password"
         android:inputType="textPassword" />
 
-    </RelativeLayout>
+
 
 
 
@@ -94,19 +83,28 @@
         android:layout_marginEnd="10dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:layout_marginBottom="42dp"
         android:layout_gravity="center_horizontal"
         android:background="#28e7b2"
         android:gravity="center"
         android:onClick="invokeLogin"
         android:text="Login"
         android:textColor="#FFFFFF" />
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent">
+
+
+
     <TextView
         android:id="@+id/tv_register"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="50dp"
+        android:layout_marginBottom="10dp"
+        android:layout_above="@+id/tv_forgotPassword"
+        android:layout_centerHorizontal="true"
         android:textSize="13sp"
         android:text="@string/txt_hint_register"
         android:textAppearance="?android:attr/textAppearanceMedium" />
@@ -117,9 +115,11 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:textSize="13sp"
-        android:layout_marginBottom="13dp"
+
         android:text="@string/txt_hint_forgot_password"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_above="@+id/footer"
+        android:layout_centerHorizontal="true" />
 
 
 
@@ -140,11 +140,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
+
             android:text="All Rights Reserved ?"
             android:textColor="#FFFFFF"
             android:textSize="16sp" />
     </RelativeLayout>
 
+
+
+    </RelativeLayout>
 
 
 </LinearLayout>
