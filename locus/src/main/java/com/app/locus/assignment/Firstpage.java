@@ -45,7 +45,7 @@ public class Firstpage extends Activity {
 	public void onLogout(View view){
 
 		//Creating an alert dialog to confirm logout
-		AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+		final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
 		alertDialogBuilder.setMessage(" Are you sure you want to logout?");
 		alertDialogBuilder.setPositiveButton("Yes",
 				new DialogInterface.OnClickListener() {
@@ -68,6 +68,8 @@ public class Firstpage extends Activity {
 					@Override
 					public void onClick(DialogInterface arg0, int arg1) {
 
+
+
 					}
 				});
 
@@ -89,10 +91,8 @@ public class Firstpage extends Activity {
 
 	public void onBackPressed() {
 
-		if (back_pressed + TIME_DELAY > System.currentTimeMillis()) {
-			super.onBackPressed();
-		}
-		else {
+
+
 			AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
 			alertDialogBuilder.setTitle("Exit Application?");
 			alertDialogBuilder
@@ -112,15 +112,11 @@ public class Firstpage extends Activity {
 
 							dialog.cancel();
 
-							home();
 						}
 					});
 
 			AlertDialog alertDialog = alertDialogBuilder.create();
 			alertDialog.show();
-
-		}
-		back_pressed = System.currentTimeMillis();
 
 	}
 	private void home() {

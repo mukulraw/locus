@@ -1,134 +1,111 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.app.locus.assignment"
-    >
-
+    package="com.app.locus.assignment">
 
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_INTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-feature android:name="android.hardware.camera"/>
-    <uses-permission android:name="android.permission.CAMERA"/>
 
+    <uses-feature android:name="android.hardware.camera" />
 
+    <uses-permission android:name="android.permission.CAMERA" />
 
     <supports-screens
-        android:smallScreens="true"
-        android:normalScreens="true"
+        android:anyDensity="true"
         android:largeScreens="true"
-        android:xlargeScreens="true"
-        android:anyDensity="true"/>
-
+        android:normalScreens="true"
+        android:smallScreens="true"
+        android:xlargeScreens="true" />
 
     <application
         android:name=".SampleApplication"
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppBaseTheme"
-        tools:replace="android:label"
-        >
-
-
-          <activity
-               android:name="com.app.locus.assignment.Flipper"
-               android:label="@string/title_activity_index"
-               android:screenOrientation="portrait"
-               android:exported="true"
-
-               >
-
-              <intent-filter>
-                   <action android:name="android.intent.action.MAIN" />
-                   <category android:name="android.intent.category.LAUNCHER" />
-               </intent-filter>
-               </activity>
-
-
-
+        android:theme="@style/AppTheme"
+        tools:replace="android:label">
         <activity
-            android:name="com.app.locus.assignment.SplashActivity"
+            android:name=".Flipper"
+            android:exported="true"
             android:label="@string/title_activity_index"
-            android:parentActivityName=".Flipper">
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".SplashActivity"
+            android:label="@string/title_activity_index"
+            android:parentActivityName=".Flipper"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.app.locus.assignment.Flipper" />
-
         </activity>
-
-
         <activity
-            android:name="com.app.locus.assignment.Register"
+            android:name=".Register"
             android:label="@string/title_activity_index"
-            android:parentActivityName=".Flipper">
-
+            android:parentActivityName=".Flipper"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.app.locus.assignment.Flipper" />
-
         </activity>
-
-
         <activity
-            android:name="com.app.locus.assignment.Firstpage"
+            android:name=".Firstpage"
             android:label="@string/title_activity_index"
-            android:parentActivityName=".SplashActivity">
-             <meta-data
+            android:parentActivityName=".SplashActivity"
+            android:screenOrientation="portrait">
+            <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.app.locus.assignment.SplashActivity" />
-
         </activity>
-
-
         <activity
-            android:name="com.app.locus.assignment.Test"
-           android:label="@string/title_activity_index">
+            android:name=".Test"
+            android:label="@string/title_activity_index"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".FilePicker"
+            android:screenOrientation="portrait" />
+
+        <!--         <activity android:name=".EntryActivity"></activity> -->
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/title_activity_index"
+            android:screenOrientation="portrait">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.app.locus.assignment.Firstpage" />
         </activity>
-
-         <activity android:name=".FilePicker"></activity>
-
         <!--
-
-        <activity android:name=".EntryActivity"></activity>
-         
-
+             ATTENTION: This was auto-generated to add Google Play services to your project for
+             App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information.
         -->
-                <activity
-                    android:name="com.app.locus.assignment.MainActivity"
-                    android:label="@string/title_activity_index"
-                    >
-                    <meta-data
-                        android:name="android.support.PARENT_ACTIVITY"
-                        android:value="com.app.locus.assignment.Firstpage" />
-
-                </activity>
-        <!-- ATTENTION: This was auto-generated to add Google Play services to your project for
-             App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information. -->
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
 
-
         <activity
             android:name=".SampleChatActivity"
             android:label="@string/chat_fragment_title"
+            android:screenOrientation="portrait"
             android:theme="@style/ZopimChatTheme"
             android:windowSoftInputMode="stateUnspecified|adjustResize">
 
             <!-- Increase the priority to receive RESUME_CHAT intent from the chat widget. ZopimChatActivity priority is -1000. To override set yours to -999 for instance. -->
             <intent-filter android:priority="-1000">
-                <action android:name="zopim.action.RESUME_CHAT"/>
-                <category android:name="android.intent.category.DEFAULT"/>
+                <action android:name="zopim.action.RESUME_CHAT" />
+
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-
-
+        <activity android:name=".Assignment"></activity>
     </application>
 
 </manifest>

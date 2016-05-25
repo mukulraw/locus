@@ -24,20 +24,27 @@
 
 
     -->
-    <style name="AppBaseTheme" parent="android:Theme.Light">
+    <style name="AppBaseTheme" parent="Theme.AppCompat.Light.NoActionBar"
+        >
        <!-- &lt;!&ndash;
             Theme customizations available in newer API levels can go in
             res/values-vXX/styles.xml, while customizations related to
             backward-compatibility can go here.
-        &ndash;&gt;
--->    </style>
+        &ndash;&gt;   -->
+
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowActionBar">false</item>
+        <item name="android:actionBarSize">0dp</item>
+
+
+    </style>
 
 
 <!--
     &lt;!&ndash; Application theme. &ndash;&gt;
 
    -->
-    <style name="AppTheme" parent="AppBaseTheme">
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
     <!--
         &lt;!&ndash; All customizations that are NOT specific to a particular API-level can go here. &ndash;&gt;
     -->

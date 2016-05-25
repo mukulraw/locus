@@ -30,7 +30,6 @@ public class Flipper extends Activity{
 
         Intent i = new Intent(this , SplashActivity.class);
         startActivity(i);
-        finish();
 
 
     }
@@ -39,7 +38,7 @@ public class Flipper extends Activity{
     {
         Intent i = new Intent(this , Register.class);
         startActivity(i);
-        finish();
+
 
     }
 

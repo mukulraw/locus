@@ -14,18 +14,18 @@
 
     <string name="txt_hint_signin">SIGN IN</string>
     <string name="txt_hint_registerdemo">REGISTER</string>
-    
+
     <string name="txt_hint_forgot_password"><u>Forgot Password ?</u></string>
     <string name="title_activity_admin">Admin</string>
     <string name="title_activity_assignment">Assignment</string>
-    
+
     <string name="title_activity_index">Kick Ass Assignments</string>
 
     <color name="grey">#808080ff</color>
     <color name="white">#ffffffff</color>
 
 
-<!--
+    <!--
 
     <string-array name="array_type1">
 
@@ -53,7 +53,7 @@
 -->
 
     <string name="title_activity_dumyfirstpage">Dumyfirstpage</string>
-    
+
     <string name="app_user_email_address">sisodiyadheeraj71@gmail.com</string>
     <string name="app_user_email_password">9250635603</string>
     <string name="assignment_help_">Assignment Help !</string>
@@ -63,8 +63,6 @@
     <string name="GPSAlertDialogMessage">GPSAlertDialogMessage</string>
     <string name="GPSAlertDialogTitle">GPSAlertDialogTitle</string>
     <string name="cancel">cancel</string>
-
-
 
 
     <string name="chat_fragment_title">Chat (fragment)</string>
@@ -78,7 +76,6 @@
     <string name="hint_account_key">Update account key</string>
     <string name="error_account_key">please enter the account key</string>
     <string name="account_key_confirm">Chat reinitialized with new account key</string>
-
 
 
 </resources>

@@ -87,7 +87,7 @@
         android:background="#28e7b2"
         android:gravity="center"
         android:onClick="invokeLogin"
-        android:text="Login"
+        android:text="LOGIN"
         android:textColor="#FFFFFF" />
 
 

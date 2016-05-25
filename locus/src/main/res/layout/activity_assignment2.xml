@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.app.locus.assignment.Assignment">
+
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Submit your requirements"
+        android:gravity="center"
+        android:textColor="@android:color/white"
+        android:padding="10dp"
+        android:textStyle="bold"
+        android:textSize="24sp"
+        android:background="@android:color/holo_blue_bright"
+        />
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+
+
+
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_height="wrap_content">
+
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Your name"
+                android:layout_marginBottom="10dp"
+                android:id="@+id/nameid"
+                />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/mailid"
+                android:hint="Your Email"
+                android:layout_marginBottom="10dp"
+                />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="phone"
+                android:layout_marginBottom="10dp"
+                android:minEms="10"
+                android:hint="Your phone"
+                android:id="@+id/phoneid"
+                />
+
+            <Spinner
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="--Select Country--"
+                android:textColor="#808080ff"
+                android:ems="10"
+                android:background="@drawable/testing_gradient"
+                android:id="@+id/spincountry"
+                android:layout_marginBottom="10dp"
+                />
+
+            <Spinner
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="--Select Subject--"
+                android:textColor="#808080ff"
+                android:ems="10"
+                android:background="@drawable/testing_gradient"
+                android:id="@+id/spinsubject"
+                android:layout_marginBottom="10dp"
+                />
+            <Spinner
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="--Select Grade--"
+                android:textColor="#808080ff"
+                android:ems="10"
+                android:background="@drawable/testing_gradient"
+                android:id="@+id/spingrade"
+                android:layout_marginBottom="10dp"
+                />
+            <Spinner
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="--Select Reference--"
+                android:textColor="#808080ff"
+                android:ems="10"
+                android:background="@drawable/testing_gradient"
+                android:id="@+id/spinreference"
+                android:layout_marginBottom="10dp"
+                />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Last date of submission"
+                android:layout_marginBottom="10dp"
+                android:id="@+id/last_date_id"
+                />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_marginBottom="10dp"
+                android:id="@+id/text_area_id"
+                />
+
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:id="@+id/browse_image_id"
+                android:layout_marginBottom="10dp"
+                />
+
+
+
+
+
+
+
+
+
+
+
+
+        </LinearLayout>
+
+
+
+    </ScrollView>
+
+    </RelativeLayout>
+
+
+</LinearLayout>
