@@ -105,7 +105,8 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".Assignment"></activity>
+        <activity android:name=".Assignment"
+            android:screenOrientation="portrait"></activity>
     </application>
 
 </manifest>

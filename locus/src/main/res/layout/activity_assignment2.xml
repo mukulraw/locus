@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:fab="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     tools:context="com.app.locus.assignment.Assignment">
 
@@ -77,8 +77,11 @@
                 android:layout_height="wrap_content"
                 android:text="--Select Country--"
                 android:textColor="#808080ff"
+                android:background="@drawable/gradient"
+                android:popupBackground="#FFFFFF"
+                android:layout_gravity="center"
+                android:padding="5dip"
                 android:ems="10"
-                android:background="@drawable/testing_gradient"
                 android:id="@+id/spincountry"
                 android:layout_marginBottom="10dp"
                 />
@@ -89,7 +92,10 @@
                 android:text="--Select Subject--"
                 android:textColor="#808080ff"
                 android:ems="10"
-                android:background="@drawable/testing_gradient"
+                android:background="@drawable/gradient"
+                android:popupBackground="#FFFFFF"
+                android:layout_gravity="center"
+                android:padding="5dip"
                 android:id="@+id/spinsubject"
                 android:layout_marginBottom="10dp"
                 />
@@ -99,7 +105,10 @@
                 android:text="--Select Grade--"
                 android:textColor="#808080ff"
                 android:ems="10"
-                android:background="@drawable/testing_gradient"
+                android:background="@drawable/gradient"
+                android:popupBackground="#FFFFFF"
+                android:layout_gravity="center"
+                android:padding="5dip"
                 android:id="@+id/spingrade"
                 android:layout_marginBottom="10dp"
                 />
@@ -109,7 +118,10 @@
                 android:text="--Select Reference--"
                 android:textColor="#808080ff"
                 android:ems="10"
-                android:background="@drawable/testing_gradient"
+                android:background="@drawable/gradient"
+                android:popupBackground="#FFFFFF"
+                android:layout_gravity="center"
+                android:padding="5dip"
                 android:id="@+id/spinreference"
                 android:layout_marginBottom="10dp"
                 />
@@ -119,6 +131,7 @@
                 android:layout_height="wrap_content"
                 android:hint="Last date of submission"
                 android:layout_marginBottom="10dp"
+                android:inputType="date"
                 android:id="@+id/last_date_id"
                 />
 
@@ -131,13 +144,60 @@
 
 
             <ImageView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:id="@+id/browse_image_id"
                 android:layout_marginBottom="10dp"
                 />
 
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="Browse"
+                android:layout_marginBottom="10dp"
+                android:id="@+id/browseid"
+                />
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_gravity="center_horizontal"
+                android:id="@+id/cameraviewid"/>
+
+            <ImageButton
+                android:layout_width="46dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center_horizontal"
+                android:id="@+id/camerabuttonid"
+                android:src="@drawable/index"
+                android:scaleType="fitXY"
+                android:layout_marginBottom="10dp"
+                />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/expectedid"
+                android:layout_marginBottom="10dp"
+                android:hint="Expected Quote in USD"
+                />
+
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="SUBMIT"
+                android:id="@+id/submitid"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+
+
+
+                />
 
 
 
@@ -154,6 +214,12 @@
 
 
     </ScrollView>
+
+
+
+
+
+
 
     </RelativeLayout>
 

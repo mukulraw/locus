@@ -1,3 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<items version="2" />
+<items version="2" >
 
+    <item
+        jar="C:\Users\hi\Desktop\Locus\Locus\locus\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="f51386bf2026e7449a832e656adb888c75e4b06f">
+        <dex dex="C:\Users\hi\Desktop\Locus\Locus\locus\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run-bootstrap_3fdaef89fb945646a553560b9c4982ea23da3ec8\classes.dex" />
+    </item>
+
+</items>

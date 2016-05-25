@@ -38,7 +38,7 @@ public class Firstpage extends Activity {
 
 	public void onAssignment(View view){
 		startActivity(new Intent(Firstpage.this,
-				MainActivity.class));
+				Assignment.class));
 
 	}
 	
