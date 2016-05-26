@@ -467,13 +467,13 @@ public class Assignment extends Activity implements View.OnClickListener, Locati
             Geocoder g = new Geocoder(getApplicationContext());
             try {
                 List<Address> addresses = g.getFromLocation(current.getLatitude() , current.getLongitude() , 5);
-                Address address = addresses.get(4);
+                Address address = addresses.get(0);
                 StringBuffer str = new StringBuffer();
-                str.append("Name: " + address + "\n");
-                str.append("Sub-Admin Ares: " + address.getSubAdminArea() + "\n");
-                str.append("Admin Area: " + address.getAdminArea() + "\n");
-                str.append("Country: " + address.getCountryName() + "\n");
-                str.append("Country Code: " + address.getCountryCode() + "\n");
+                str.append("Name: ").append(address).append("\n");
+                str.append("Sub-Admin Areas: ").append(address.getSubAdminArea()).append("\n");
+                str.append("Admin Area: ").append(address.getAdminArea()).append("\n");
+                str.append("Country: ").append(address.getCountryName()).append("\n");
+                str.append("Country Code: ").append(address.getCountryCode()).append("\n");
                 strAddress = str.toString();
             } catch (IOException e) {
                 e.printStackTrace();
