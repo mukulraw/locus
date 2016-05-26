@@ -1,14 +1,26 @@
 package com.app.locus.assignment;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Locale;
+
 import android.app.Activity;
 import android.content.Intent;
-import android.database.Cursor;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.MediaStore;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -23,9 +35,6 @@ import android.widget.Toast;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Assignment extends Activity implements View.OnClickListener{
 
@@ -95,7 +104,10 @@ public class Assignment extends Activity implements View.OnClickListener{
     private int PICK_IMAGE_REQUEST = 1;
     private int CAPTURE_IMAGE_REQUEST = 2;
 
+    Uri fileUri;
 
+    public static final int MEDIA_TYPE_IMAGE = 1;
+    public static final int MEDIA_TYPE_VIDEO = 2;
     Bitmap bitmap;
 
     @Override
@@ -226,9 +238,23 @@ public class Assignment extends Activity implements View.OnClickListener{
         if (v==camera)
         {
 
-            Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-            startActivityForResult(intent , CAPTURE_IMAGE_REQUEST);
+         //   Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+          //  fileUri = getOutputMediaFileUri(MEDIA_TYPE_IMAGE);
+          //  intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri);
 
+           // startActivityForResult(intent , CAPTURE_IMAGE_REQUEST);
+
+
+
+            Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            //File photo = new File(Environment.getExternalStorageDirectory(),  "Pic.jpg");
+           // intent.putExtra(MediaStore.EXTRA_OUTPUT,
+           //         Uri.fromFile(photo));
+           // fileUri = Uri.fromFile(photo);
+            fileUri = getOutputMediaFileUri(MEDIA_TYPE_IMAGE);
+
+            intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri);
+            startActivityForResult(intent, CAPTURE_IMAGE_REQUEST);
 
         }
 
@@ -251,6 +277,47 @@ public class Assignment extends Activity implements View.OnClickListener{
 
     }
 
+
+
+    public Uri getOutputMediaFileUri(int type) {
+        return Uri.fromFile(getOutputMediaFile(type));
+    }
+
+
+    private static File getOutputMediaFile(int type) {
+
+        // External sdcard location
+        File mediaStorageDir = new File(
+                Environment
+                        .getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES),
+                "Android File Upload");
+
+        // Create the storage directory if it does not exist
+        if (!mediaStorageDir.exists()) {
+            if (!mediaStorageDir.mkdirs()) {
+                Log.d("asdasdasd", "Oops! Failed create "
+                        + "Android File Upload" + " directory");
+                return null;
+            }
+        }
+
+        // Create a media file name
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss",
+                Locale.getDefault()).format(new Date());
+        File mediaFile;
+        if (type == MEDIA_TYPE_IMAGE) {
+            mediaFile = new File(mediaStorageDir.getPath() + File.separator
+                    + "IMG_" + timeStamp + ".jpg");
+        } else if (type == MEDIA_TYPE_VIDEO) {
+            mediaFile = new File(mediaStorageDir.getPath() + File.separator
+                    + "VID_" + timeStamp + ".mp4");
+        } else {
+            return null;
+        }
+
+        return mediaFile;
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -261,7 +328,9 @@ public class Assignment extends Activity implements View.OnClickListener{
                 bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), Uri.parse(String.valueOf(data.getData())));
                 browse_image.setImageBitmap(bitmap);
                 path = String.valueOf(data.getData());
-                bean.setBrowse(bitmap);
+                //bean.setBrowse(bitmap);
+                File photo = new File(path);
+                bean.setBrowse(getStringImage(bitmap));
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -272,30 +341,49 @@ public class Assignment extends Activity implements View.OnClickListener{
 
             if (data != null) {
 
-       /*         String[] projection = {MediaStore.Images.Media.DATA};
-                Cursor cursor = managedQuery(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, projection, null, null, null);
-                int colunm_index_data = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
-                cursor.moveToNext();
-                //String imagepath = cursor.getString(colunm_index_data);
-
-                String imagepath = cursor.getString(colunm_index_data);
-                bean.setCamera(imagepath);
-                Bitmap bitmapImage = BitmapFactory.decodeFile(imagepath );
-                Log.d("asdasdasd" , imagepath);
-*/
-
-                //camera_image.setImageBitmap(bitmapImage );
 
 
-                photo = (Bitmap) data.getExtras().get("data");
-                Log.d("asdasdasd" , String.valueOf(data.getDataString()));
-                bean.setCamera(bitmap);
-                camera_image.setImageBitmap(photo);
 
-            }
+
+
+
+
+            //   photo = (Bitmap) data.getExtras().get("data");
+
+
+             //   Uri tempUri = getImageUri(getApplicationContext(), photo);
+
+            //    Log.d("asdasdasd" , getRealPathFromURI(tempUri));
+
+              //  bean.setCamera(new File(getRealPathFromURI(tempUri)));
+
+
+                bean.setCamera(getStringImage((Bitmap) data.getExtras().get("data")));
+
+                camera_image.setImageBitmap((Bitmap) data.getExtras().get("data"));
+
+
+
+
+
+
+
+
+
+
+
+                }
         }
     }
 
+
+    public String getStringImage(Bitmap bmp){
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bmp.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+        byte[] imageBytes = baos.toByteArray();
+        String encodedImage = Base64.encodeToString(imageBytes, Base64.DEFAULT);
+        return encodedImage;
+    }
 
 
 
@@ -307,7 +395,7 @@ public class Assignment extends Activity implements View.OnClickListener{
         String result = "";
 
         String name , email , phone , country , subject , grade , reference , last_date , area_text , expected;
-        Bitmap camera , browse;
+        String camera , browse;
 
         upload(assignment_bean b)
         {
@@ -346,7 +434,56 @@ public class Assignment extends Activity implements View.OnClickListener{
 
             result = ruc.sendPostRequest(POST_URL , data);
 
-           // Toast.makeText(getApplicationContext() , result , Toast.LENGTH_SHORT).show();
+
+
+            Toast.makeText(getApplicationContext() , result , Toast.LENGTH_SHORT).show();
+
+
+
+
+     /*       String requestURL = "http://www.kickassassignmenthelp.com/wp-content/themes/assignment/assignment-save.php";
+
+            try {
+                MultipartUtility multipart = new MultipartUtility(requestURL, "UTF-8");
+
+                //multipart.addHeaderField("User-Agent", "CodeJava");
+               // multipart.addHeaderField("Test-Header", "Header-Value");
+
+                multipart.addFormField("name", name);
+                multipart.addFormField("email", email);
+                multipart.addFormField("phone", phone);
+
+                multipart.addFormField("country", country);
+                multipart.addFormField("subject", subject);
+                multipart.addFormField("pagrade", grade);
+                multipart.addFormField("reference", reference);
+                multipart.addFormField("lastdateofsubmission", last_date);
+                multipart.addFormField("textarea", area_text);
+                multipart.addFormField("paexpect", expected);
+                multipart.addFilePart("browse", browse);
+                multipart.addFormField("location", "13");
+                multipart.addFilePart("camera", camera);
+
+
+                // multipart.addFilePart("fileUpload", uploadFile2);
+
+                List<String> response = multipart.finish();
+
+                System.out.println("-------------SERVER REPLIED:-----------" + response);
+
+                for (String line : response) {
+                    System.out.println(line);
+                    result = line;
+                }
+
+
+            } catch (IOException ex) {
+                System.err.println("-----------error" + ex);
+            }
+
+*/
+
+
 
             return null;
         }

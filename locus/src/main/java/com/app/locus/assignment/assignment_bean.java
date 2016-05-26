@@ -2,13 +2,15 @@ package com.app.locus.assignment;
 
 import android.graphics.Bitmap;
 
+import java.io.File;
+
 /**
  * Created by hi on 25-05-2016.
  */
 public class assignment_bean {
 
     String name , email , phone , country , subject , grade , reference , last_date , area_text , expected , location;
-    Bitmap camera , browse;
+    String camera , browse;
 
 
     public String getLocation() {
@@ -100,22 +102,20 @@ public class assignment_bean {
         this.expected = expected;
     }
 
-    public void setCamera(Bitmap camera) {
+    public void setCamera(String camera) {
         this.camera = camera;
     }
 
-    public Bitmap getCamera() {
+    public String getCamera() {
         return camera;
     }
 
-    public void setBrowse(Bitmap browse) {
+    public void setBrowse(String browse) {
         this.browse = browse;
     }
 
-    public Bitmap getBrowse() {
+    public String getBrowse() {
         return browse;
     }
-
-
 }
 

@@ -106,6 +106,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".Assignment"
+            android:windowSoftInputMode="stateHidden"
             android:screenOrientation="portrait"></activity>
     </application>
 
