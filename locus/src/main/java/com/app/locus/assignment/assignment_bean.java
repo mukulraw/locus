@@ -4,9 +4,7 @@ import android.graphics.Bitmap;
 
 import java.io.File;
 
-/**
- * Created by hi on 25-05-2016.
- */
+
 public class assignment_bean {
 
     String name , email , phone , country , subject , grade , reference , last_date , area_text , expected , location;

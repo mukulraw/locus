@@ -6,20 +6,29 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Objects;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.location.Address;
+import android.location.Geocoder;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.support.v4.app.ActivityCompat;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
@@ -36,20 +45,18 @@ import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 
 
-public class Assignment extends Activity implements View.OnClickListener{
+public class Assignment extends Activity implements View.OnClickListener, LocationListener {
 
 
-    EditText name , email , phone , last_date , text_area , expected;
-    Spinner country , subject , grade , reference;
+    EditText _name, _email, _phone, _last_date, _text_area, _expected;
+    Spinner _country, _subject, _grade, _reference;
     ImageButton camera;
-    ImageView browse_image , camera_image;
-    Button submit , browser;
+    ImageView browse_image, camera_image;
+    Button submit, browser;
 
-    private Bitmap photo;
 
     String POST_URL = "http://www.kickassassignmenthelp.com/wp-content/themes/assignment/assignment-save.php";
 
-    String path;
 
     private String listSpinner1[] = {"Afghanistan", "Akrotiri", "Albania", "Algeria",
             "American Samoa", "Andorra", "Angola", "Anguilla", "Antarctica", "Antigua and Barbuda", "Argentina", "Armenia",
@@ -110,6 +117,14 @@ public class Assignment extends Activity implements View.OnClickListener{
     public static final int MEDIA_TYPE_VIDEO = 2;
     Bitmap bitmap;
 
+
+    String strAddress;
+
+    Location current;
+
+
+    String bo, cm;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -117,37 +132,51 @@ public class Assignment extends Activity implements View.OnClickListener{
 
         bean = new assignment_bean();
 
-        name = (EditText)findViewById(R.id.nameid);
-        email = (EditText)findViewById(R.id.mailid);
-        phone = (EditText)findViewById(R.id.phoneid);
+        _name = (EditText) findViewById(R.id.nameid);
+        _email = (EditText) findViewById(R.id.mailid);
+        _phone = (EditText) findViewById(R.id.phoneid);
 
 
-        country = (Spinner)findViewById(R.id.spincountry);
-        subject = (Spinner)findViewById(R.id.spinsubject);
-        grade = (Spinner)findViewById(R.id.spingrade);
-        reference = (Spinner)findViewById(R.id.spinreference);
+        _country = (Spinner) findViewById(R.id.spincountry);
+        _subject = (Spinner) findViewById(R.id.spinsubject);
+        _grade = (Spinner) findViewById(R.id.spingrade);
+        _reference = (Spinner) findViewById(R.id.spinreference);
 
-        last_date = (EditText)findViewById(R.id.last_date_id);
-        text_area = (EditText)findViewById(R.id.text_area_id);
+        _last_date = (EditText) findViewById(R.id.last_date_id);
+        _text_area = (EditText) findViewById(R.id.text_area_id);
 
-        browse_image = (ImageView)findViewById(R.id.browse_image_id);
+        browse_image = (ImageView) findViewById(R.id.browse_image_id);
 
-        browser = (Button)findViewById(R.id.browseid);
+        browser = (Button) findViewById(R.id.browseid);
 
-        camera_image = (ImageView)findViewById(R.id.cameraviewid);
+        camera_image = (ImageView) findViewById(R.id.cameraviewid);
 
-        camera = (ImageButton)findViewById(R.id.camerabuttonid);
+        camera = (ImageButton) findViewById(R.id.camerabuttonid);
 
-        expected = (EditText)findViewById(R.id.expectedid);
+        _expected = (EditText) findViewById(R.id.expectedid);
 
-        submit = (Button)findViewById(R.id.submitid);
+        submit = (Button) findViewById(R.id.submitid);
 
         submit.setOnClickListener(this);
         browser.setOnClickListener(this);
         camera.setOnClickListener(this);
 
 
-        country.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
+        }
+        locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, this);
+
+
+        _country.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 bean.setCountry(listSpinner1[position]);
@@ -159,11 +188,11 @@ public class Assignment extends Activity implements View.OnClickListener{
             }
         });
         ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(this , R.layout.simple_spinner_item , listSpinner1);
-        country.setAdapter(adapter1);
+        _country.setAdapter(adapter1);
 
    //     subject.setOnItemClickListener(this);
 
-        subject.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        _subject.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 bean.setSubject(listSpinner2[position]);
@@ -175,11 +204,11 @@ public class Assignment extends Activity implements View.OnClickListener{
             }
         });
         ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(this , R.layout.simple_spinner_item , listSpinner2);
-        subject.setAdapter(adapter2);
+        _subject.setAdapter(adapter2);
 
   //      grade.setOnItemClickListener(this);
 
-        grade.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        _grade.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 bean.setGrade(listSpinner3[position]);
@@ -191,11 +220,11 @@ public class Assignment extends Activity implements View.OnClickListener{
             }
         });
         ArrayAdapter<String> adapter3 = new ArrayAdapter<String>(this , R.layout.simple_spinner_item , listSpinner3);
-        grade.setAdapter(adapter3);
+        _grade.setAdapter(adapter3);
 
   //      reference.setOnItemClickListener(this);
 
-        reference.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        _reference.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 bean.setReference(listSpinner4[position]);
@@ -207,7 +236,7 @@ public class Assignment extends Activity implements View.OnClickListener{
             }
         });
         ArrayAdapter<String> adapter4 = new ArrayAdapter<String>(this , R.layout.simple_spinner_item , listSpinner4);
-        reference.setAdapter(adapter4);
+        _reference.setAdapter(adapter4);
 
 
 
@@ -251,9 +280,9 @@ public class Assignment extends Activity implements View.OnClickListener{
            // intent.putExtra(MediaStore.EXTRA_OUTPUT,
            //         Uri.fromFile(photo));
            // fileUri = Uri.fromFile(photo);
-            fileUri = getOutputMediaFileUri(MEDIA_TYPE_IMAGE);
+            //fileUri = getOutputMediaFileUri(MEDIA_TYPE_IMAGE);
 
-            intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri);
+            //intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri);
             startActivityForResult(intent, CAPTURE_IMAGE_REQUEST);
 
         }
@@ -262,12 +291,16 @@ public class Assignment extends Activity implements View.OnClickListener{
         if(v==submit)
         {
 
-            bean.setName(String.valueOf(name.getText()));
-            bean.setEmail(String.valueOf(email.getText()));
-            bean.setPhone(String.valueOf(phone.getText()));
-            bean.setLast_date(String.valueOf(last_date.getText()));
-            bean.setArea_text(String.valueOf(text_area.getText()));
-            bean.setExpected(String.valueOf(expected.getText()));
+            bean.setName(String.valueOf(_name.getText()));
+            bean.setEmail(String.valueOf(_email.getText()));
+            bean.setPhone(String.valueOf(_phone.getText()));
+            bean.setLast_date(String.valueOf(_last_date.getText()));
+            bean.setArea_text(String.valueOf(_text_area.getText()));
+            bean.setExpected(String.valueOf(_expected.getText()));
+            bean.setLocation(String.valueOf(current.getLatitude()) + String.valueOf(current.getLongitude()));
+
+
+            Log.d("asdasdasd" , String.valueOf(current.getLatitude()) + String.valueOf(current.getLongitude()));
 
 
             new upload(bean).execute();
@@ -279,44 +312,9 @@ public class Assignment extends Activity implements View.OnClickListener{
 
 
 
-    public Uri getOutputMediaFileUri(int type) {
-        return Uri.fromFile(getOutputMediaFile(type));
-    }
 
 
-    private static File getOutputMediaFile(int type) {
 
-        // External sdcard location
-        File mediaStorageDir = new File(
-                Environment
-                        .getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES),
-                "Android File Upload");
-
-        // Create the storage directory if it does not exist
-        if (!mediaStorageDir.exists()) {
-            if (!mediaStorageDir.mkdirs()) {
-                Log.d("asdasdasd", "Oops! Failed create "
-                        + "Android File Upload" + " directory");
-                return null;
-            }
-        }
-
-        // Create a media file name
-        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss",
-                Locale.getDefault()).format(new Date());
-        File mediaFile;
-        if (type == MEDIA_TYPE_IMAGE) {
-            mediaFile = new File(mediaStorageDir.getPath() + File.separator
-                    + "IMG_" + timeStamp + ".jpg");
-        } else if (type == MEDIA_TYPE_VIDEO) {
-            mediaFile = new File(mediaStorageDir.getPath() + File.separator
-                    + "VID_" + timeStamp + ".mp4");
-        } else {
-            return null;
-        }
-
-        return mediaFile;
-    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -326,11 +324,14 @@ public class Assignment extends Activity implements View.OnClickListener{
 
             try {
                 bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), Uri.parse(String.valueOf(data.getData())));
+                browse_image.setVisibility(View.VISIBLE);
                 browse_image.setImageBitmap(bitmap);
-                path = String.valueOf(data.getData());
                 //bean.setBrowse(bitmap);
-                File photo = new File(path);
-                bean.setBrowse(getStringImage(bitmap));
+
+                String bit = getStringImage(bitmap);
+                bean.setBrowse(bit);
+                bo = bit;
+                Log.d("asdasdasd" , bit);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -358,8 +359,16 @@ public class Assignment extends Activity implements View.OnClickListener{
               //  bean.setCamera(new File(getRealPathFromURI(tempUri)));
 
 
-                bean.setCamera(getStringImage((Bitmap) data.getExtras().get("data")));
+                Bitmap cam = (Bitmap) data.getExtras().get("data");
 
+                String cams = getStringImage(cam);
+
+                bean.setCamera(cams);
+
+                cm = cams;
+                Log.d("asdasdasd" , cams);
+
+                camera_image.setVisibility(View.VISIBLE);
                 camera_image.setImageBitmap((Bitmap) data.getExtras().get("data"));
 
 
@@ -381,10 +390,28 @@ public class Assignment extends Activity implements View.OnClickListener{
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         bmp.compress(Bitmap.CompressFormat.JPEG, 100, baos);
         byte[] imageBytes = baos.toByteArray();
-        String encodedImage = Base64.encodeToString(imageBytes, Base64.DEFAULT);
-        return encodedImage;
+        return Base64.encodeToString(imageBytes, Base64.DEFAULT);
     }
 
+    @Override
+    public void onLocationChanged(Location location) {
+        this.current = location;
+    }
+
+    @Override
+    public void onStatusChanged(String provider, int status, Bundle extras) {
+
+    }
+
+    @Override
+    public void onProviderEnabled(String provider) {
+
+    }
+
+    @Override
+    public void onProviderDisabled(String provider) {
+
+    }
 
 
     private class upload extends AsyncTask<Void , Void , Void>
@@ -394,7 +421,7 @@ public class Assignment extends Activity implements View.OnClickListener{
 
         String result = "";
 
-        String name , email , phone , country , subject , grade , reference , last_date , area_text , expected;
+        String name , email , phone , country , subject , grade , reference , last_date , area_text , expected , location;
         String camera , browse;
 
         upload(assignment_bean b)
@@ -411,12 +438,14 @@ public class Assignment extends Activity implements View.OnClickListener{
             this.expected = b.getExpected();
             this.camera = b.getCamera();
             this.browse = b.getBrowse();
+            this.location = b.getLocation();
         }
 
         @Override
         protected Void doInBackground(Void... params) {
 
 
+            /*
             List<NameValuePair> data = new ArrayList<NameValuePair>();
             data.add(new BasicNameValuePair("name" , name));
             data.add(new BasicNameValuePair("email" , email));
@@ -429,14 +458,48 @@ public class Assignment extends Activity implements View.OnClickListener{
             data.add(new BasicNameValuePair("textarea" , area_text));
             data.add(new BasicNameValuePair("paexpect" , expected));
             data.add(new BasicNameValuePair("location" , "12"));
-            data.add(new BasicNameValuePair("browse" , path));
-            data.add(new BasicNameValuePair("camera" , path));
+            data.add(new BasicNameValuePair("browse" , browse));
+            data.add(new BasicNameValuePair("camera" , camera));
 
             result = ruc.sendPostRequest(POST_URL , data);
+*/
+
+            Geocoder g = new Geocoder(getApplicationContext());
+            try {
+                List<Address> addresses = g.getFromLocation(current.getLatitude() , current.getLongitude() , 5);
+                Address address = addresses.get(4);
+                StringBuffer str = new StringBuffer();
+                str.append("Name: " + address + "\n");
+                str.append("Sub-Admin Ares: " + address.getSubAdminArea() + "\n");
+                str.append("Admin Area: " + address.getAdminArea() + "\n");
+                str.append("Country: " + address.getCountryName() + "\n");
+                str.append("Country Code: " + address.getCountryCode() + "\n");
+                strAddress = str.toString();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
 
 
+            HashMap<String , String> info = new HashMap<>();
 
-            Toast.makeText(getApplicationContext() , result , Toast.LENGTH_SHORT).show();
+            info.put("name" , name);
+            info.put("email" , email);
+            info.put("phone" , phone);
+            info.put("country" , country);
+            info.put("subject" , subject);
+            info.put("pagrade" , grade);
+            info.put("refrence" , reference);
+            info.put("lastdateofsubmission" , last_date);
+            info.put("textarea" , area_text);
+            info.put("paexpect" , expected);
+            info.put("location" , strAddress);
+            info.put("browse" , bo);
+            info.put("camera" , cm);
+
+
+            RequestHandler handler = new RequestHandler();
+            result = handler.sendPostRequest(POST_URL , info);
+
 
 
 
@@ -492,7 +555,24 @@ public class Assignment extends Activity implements View.OnClickListener{
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
             Log.d("asdasdasd" , result);
+            Log.d("asdasdasd" , strAddress);
             Toast.makeText(getBaseContext() , result , Toast.LENGTH_SHORT).show();
+
+            if(result.equals("Your requirment submit successfully"))
+            {
+                _name.setText("");
+                _email.setText("");
+                _phone.setText("");
+                _last_date.setText("");
+                _text_area.setText("");
+                _expected.setText("");
+                browse_image.setImageBitmap(null);
+                camera_image.setImageBitmap(null);
+
+            }
+
+
+
 
 
         }
