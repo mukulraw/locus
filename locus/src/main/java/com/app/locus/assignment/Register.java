@@ -42,7 +42,7 @@ public class Register extends Activity implements View.OnClickListener{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register);
+        setContentView(R.layout.register2);
         
         /*
          * using for making the control
@@ -104,8 +104,16 @@ public class Register extends Activity implements View.OnClickListener{
         }
         
         else{
-        
-        register(name,mobile,email,password);
+
+            ConnectionDetector cd = new ConnectionDetector(getBaseContext());
+            if(cd.isConnectingToInternet()) {
+
+                register(name, mobile, email, password);
+            }
+            else
+            {
+                Toast.makeText(getBaseContext() , "No Internet Connection" , Toast.LENGTH_SHORT).show();
+            }
         }
         
     }

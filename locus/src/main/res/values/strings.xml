@@ -76,6 +76,19 @@
     <string name="hint_account_key">Update account key</string>
     <string name="error_account_key">please enter the account key</string>
     <string name="account_key_confirm">Chat reinitialized with new account key</string>
+    <string name="sign_in">SIGN IN</string>
+    <string name="sign_up">SIGN UP</string>
+    <string name="user_name">User Name</string>
+    <string name="assignment">Assignment</string>
+    <string name="all_rights_reserved">All Rights Reserved ?</string>
+    <string name="screen_name">Screen Name*</string>
+    <string name="mobile_no">Mobile No.*</string>
+    <string name="email_id1">Email ID*</string>
+    <string name="password">Password*</string>
+    <string name="submit">Submit</string>
+    <string name="screen_name1">Screen Name</string>
+    <string name="password1">Password</string>
+    <string name="login">LOGIN</string>
 
 
 </resources>

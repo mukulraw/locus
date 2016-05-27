@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     >
@@ -12,10 +13,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:adjustViewBounds="true"
-                android:maxHeight="375dp"
                 android:scaleType="fitXY"
                 android:src="@drawable/a11"
-                android:contentDescription="" />
+                tools:ignore="ContentDescription" />
 
 
 
@@ -32,8 +32,9 @@
 
         <Button
             android:layout_width="0dp"
+            style="?android:buttonBarButtonStyle"
             android:layout_weight="1"
-            android:text="SIGN IN"
+            android:text="@string/sign_in"
             android:onClick="signin"
             android:textColor="@android:color/white"
             android:background="@android:color/holo_blue_dark"
@@ -42,7 +43,8 @@
 
         <Button
             android:layout_width="0dp"
-            android:text="SIGN UP"
+            android:text="@string/sign_up"
+            style="?android:buttonBarButtonStyle"
             android:onClick="signup"
             android:textColor="@android:color/white"
             android:background="@android:color/darker_gray"

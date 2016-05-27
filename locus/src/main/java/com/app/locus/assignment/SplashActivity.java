@@ -120,7 +120,17 @@ public class SplashActivity extends Activity implements OnClickListener{
                            }
 
                         else {
-                               onsend(email);
+                               ConnectionDetector cd = new ConnectionDetector(getBaseContext());
+                               if(cd.isConnectingToInternet()) {
+
+                                   onsend(email);
+                                   dialog.dismiss();
+                               }
+                               else
+                               {
+                                   Toast.makeText(getBaseContext() , "No Internet Connection" , Toast.LENGTH_SHORT).show();
+                                   dialog.dismiss();
+                               }
                            }
                     }
 
@@ -291,7 +301,15 @@ public class SplashActivity extends Activity implements OnClickListener{
         }
 
         else{
-              login(name,password);
+
+            ConnectionDetector cd = new ConnectionDetector(getBaseContext());
+            if(cd.isConnectingToInternet()) {
+                login(name, password);
+            }
+            else
+            {
+                Toast.makeText(getBaseContext() , "No Internet Connection" , Toast.LENGTH_SHORT).show();
+            }
             }
  
     }

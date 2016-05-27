@@ -172,7 +172,6 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="40dp"
         android:background="#28e7b2"
-        android:onClick="onRegister"
         android:text="Submit"
         android:textColor="#FFFFFF" />
 

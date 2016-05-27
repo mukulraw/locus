@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <RelativeLayout
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="?android:actionBarSize"
+        android:background="#6699FF"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center" >
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:text="@string/user_name"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="10dp"
+            android:textColor="#FFFFFF"
+            android:layout_marginBottom="10dp"
+            android:textSize="23sp"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="10dp" />
+
+
+        <Button
+            android:id="@+id/button52"
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/lo"
+            android:onClick="onLogout"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
+            tools:ignore="RelativeOverlap" />
+
+    </RelativeLayout>
+
+
+
+    <ImageView
+        android:id="@+id/button2"
+        android:layout_width="match_parent"
+        android:layout_height="?android:actionBarSize"
+        android:layout_gravity="center_horizontal"
+        android:src="@drawable/hw"
+        tools:ignore="ContentDescription" />
+
+
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:weightSum="3"
+            android:orientation="vertical"
+            >
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1">
+
+                <Button
+                    android:id="@+id/button3"
+                    android:layout_width="match_parent"
+                    android:layout_height="61dp"
+                    android:background="#66CCFF"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:gravity="center"
+                    android:layout_alignParentBottom="true"
+                    android:onClick="onAssignment"
+                    android:text="@string/assignment"
+                    android:textColor="#FFFFFF"
+                    android:textSize="21sp" />
+
+
+
+                <Button
+                    android:id="@+id/button5"
+                    style="?android:attr/buttonStyleSmall"
+                    android:layout_width="55dp"
+                    android:layout_height="65dp"
+                    android:gravity="center"
+                    android:layout_alignBottom="@+id/button3"
+                    android:layout_alignStart="@+id/button3"
+                    android:background="@drawable/assign"
+                    android:layout_alignLeft="@+id/button3" />
+
+            </RelativeLayout>
+
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                >
+
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/buttonNoConfig"
+                    android:onClick="buttonNoConfig"
+                    android:background="@drawable/livechat"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginTop="60dp" />
+
+
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+
+                >
+
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:gravity="center"
+                        android:layout_centerHorizontal="true"
+                        android:layout_alignParentBottom="true"
+                        android:background="#666666"
+                        android:text="@string/all_rights_reserved"
+                        android:textColor="#FFFFFF"
+                        android:textSize="15sp" />
+
+
+            </RelativeLayout>
+
+
+
+
+        </LinearLayout>
+
+
+
+
+
+
+
+</LinearLayout>
