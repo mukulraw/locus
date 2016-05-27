@@ -38,7 +38,7 @@
             android:layout_marginEnd="10dp"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
-            android:background="@drawable/lo"
+            android:background="@mipmap/ic_log"
             android:onClick="onLogout"
             android:layout_alignParentRight="true"
             android:layout_marginRight="10dp"
@@ -76,29 +76,22 @@
                 <Button
                     android:id="@+id/button3"
                     android:layout_width="match_parent"
-                    android:layout_height="61dp"
-                    android:background="#66CCFF"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/round"
                     android:layout_marginStart="10dp"
                     android:layout_marginEnd="10dp"
                     android:gravity="center"
                     android:layout_alignParentBottom="true"
                     android:onClick="onAssignment"
                     android:text="@string/assignment"
+                    android:drawableStart="@drawable/ic_write"
                     android:textColor="#FFFFFF"
-                    android:textSize="21sp" />
+                    android:textSize="21sp"
+                    android:drawableLeft="@drawable/ic_write" />
 
 
 
-                <Button
-                    android:id="@+id/button5"
-                    style="?android:attr/buttonStyleSmall"
-                    android:layout_width="55dp"
-                    android:layout_height="65dp"
-                    android:gravity="center"
-                    android:layout_alignBottom="@+id/button3"
-                    android:layout_alignStart="@+id/button3"
-                    android:background="@drawable/assign"
-                    android:layout_alignLeft="@+id/button3" />
+
 
             </RelativeLayout>
 
@@ -136,7 +129,6 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_margin="5dp"
                         android:gravity="center"
                         android:layout_centerHorizontal="true"
                         android:layout_alignParentBottom="true"

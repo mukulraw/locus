@@ -89,6 +89,7 @@
     <string name="screen_name1">Screen Name</string>
     <string name="password1">Password</string>
     <string name="login">LOGIN</string>
+    <string name="all_rights_reserved1">All Rights Reserved ?</string>
 
 
 </resources>

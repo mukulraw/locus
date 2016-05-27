@@ -89,7 +89,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:layout_gravity="center_horizontal"
-        android:background="#28e7b2"
+        android:background="@drawable/round"
         android:gravity="center"
         android:onClick="invokeLogin"
         android:text="@string/login"
@@ -144,9 +144,8 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp"
 
-            android:text="All Rights Reserved ?"
+            android:text="@string/all_rights_reserved1"
             android:textColor="#FFFFFF"
             android:textSize="16sp" />
     </RelativeLayout>
