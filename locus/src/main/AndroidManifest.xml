@@ -69,7 +69,7 @@
         <activity
             android:name=".Test"
             android:label="@string/title_activity_index"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".FilePicker"
             android:screenOrientation="portrait" />

@@ -4,7 +4,9 @@
       <root url="file://$PROJECT_DIR$/locus/build/intermediates/exploded-aar/com.zopim.android/sdk/1.2.1.1/res" />
       <root url="jar://$PROJECT_DIR$/locus/build/intermediates/exploded-aar/com.zopim.android/sdk/1.2.1.1/jars/classes.jar!/" />
     </CLASSES>
-    <JAVADOC />
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/Downloads/sdk-1.2.2.1-javadoc.jar!/" />
+    </JAVADOC>
     <SOURCES />
   </library>
 </component>

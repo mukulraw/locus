@@ -12,7 +12,9 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.zopim.android.sdk.api.ZopimChat;
+import com.zopim.android.sdk.prechat.PreChatForm;
 import com.zopim.android.sdk.prechat.ZopimChatActivity;
+import com.zopim.android.sdk.model.VisitorInfo;
 
 public class Firstpage extends Activity {
 
@@ -28,7 +30,7 @@ public class Firstpage extends Activity {
 		SharedPreferences preferences = getSharedPreferences(SplashActivity.MyPREFERENCES, Context.MODE_PRIVATE);
 	      String username = intent.getStringExtra(SplashActivity.USER_NAME);
 		 // String username1=intent.getStringExtra(Register.USER_NAME);
-
+        ZopimChat.init("3wdG5NtNSf8DXdcH5bGhXe2LWQH6U6WL").build();
 		textview=(TextView) findViewById(R.id.textView1);
 		
 		textview.setText(username);
@@ -82,10 +84,29 @@ public class Firstpage extends Activity {
 
 
     public void buttonNoConfig(View view) {
-        startActivity(new Intent(this, ZopimChatActivity.class));
+      //  startActivity(new Intent(this, ZopimChatActivity.class));
 
         // Sample breadcrumb
-        ZopimChat.trackEvent("Started chat without config");
+       // ZopimChat.trackEvent("Started chat without config");
+
+        PreChatForm preChatConfig = new PreChatForm.Builder()
+                .name(PreChatForm.Field.OPTIONAL_EDITABLE)
+                .email(PreChatForm.Field.OPTIONAL_EDITABLE)
+                .phoneNumber(PreChatForm.Field.OPTIONAL_EDITABLE)
+                .department(PreChatForm.Field.OPTIONAL_EDITABLE)
+                .message(PreChatForm.Field.OPTIONAL_EDITABLE)
+                .build();
+
+        // build chat config
+        ZopimChat.SessionConfig config = new ZopimChat.SessionConfig().preChatForm(preChatConfig);
+
+        // start chat activity with config
+        ZopimChatActivity.startActivity(this, config);
+
+        // Sample breadcrumb
+        ZopimChat.trackEvent("Started chat with optional pre-chat form");
+
+
     }
 
 
