@@ -4,7 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.ActionBarActivity;
+
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
 import com.zopim.android.sdk.api.Chat;
@@ -16,10 +17,8 @@ import com.zopim.android.sdk.prechat.PreChatForm;
 import com.zopim.android.sdk.prechat.ZopimChatFragment;
 import com.zopim.android.sdk.widget.ChatWidgetService;
 
-/**
- * Activity that configures the {@link ZopimChatFragment} to start the chat with pre chat fields
- */
-public class SampleChatActivity extends ActionBarActivity implements ChatListener {
+
+public class SampleChatActivity extends AppCompatActivity implements ChatListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

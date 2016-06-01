@@ -3,7 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:fab="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     tools:context="com.app.locus.assignment.Assignment">
 
@@ -11,8 +10,8 @@
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Submit your requirements"
+        android:layout_height="?android:attr/actionBarSize"
+        android:text="@string/submit_your_requirements"
         android:gravity="center"
         android:textColor="@android:color/white"
         android:padding="10dp"
@@ -22,9 +21,6 @@
         />
 
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
 
 
 
@@ -49,7 +45,7 @@
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Your name"
+                android:hint="@string/your_name"
                 android:layout_marginBottom="10dp"
                 android:id="@+id/nameid"
                 />
@@ -58,7 +54,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/mailid"
-                android:hint="Your Email"
+                android:inputType="textEmailAddress"
+                android:hint="@string/your_email"
                 android:layout_marginBottom="10dp"
                 />
 
@@ -68,14 +65,14 @@
                 android:inputType="phone"
                 android:layout_marginBottom="10dp"
                 android:minEms="10"
-                android:hint="Your phone"
+                android:hint="@string/your_phone"
                 android:id="@+id/phoneid"
                 />
 
             <Spinner
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="--Select Country--"
+                android:text="@string/select_country"
                 android:textColor="#808080ff"
                 android:background="@drawable/gradient"
                 android:popupBackground="#FFFFFF"
@@ -89,7 +86,7 @@
             <Spinner
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="--Select Subject--"
+                android:text="@string/select_subject"
                 android:textColor="#808080ff"
                 android:ems="10"
                 android:background="@drawable/gradient"
@@ -102,7 +99,7 @@
             <Spinner
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="--Select Grade--"
+                android:text="@string/select_grade"
                 android:textColor="#808080ff"
                 android:ems="10"
                 android:background="@drawable/gradient"
@@ -115,7 +112,7 @@
             <Spinner
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="--Select Reference--"
+                android:text="@string/select_reference"
                 android:textColor="#808080ff"
                 android:ems="10"
                 android:background="@drawable/gradient"
@@ -129,7 +126,7 @@
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Last date of submission"
+                android:hint="@string/last_date_of_submission"
                 android:layout_marginBottom="10dp"
                 android:inputType="date"
                 android:id="@+id/last_date_id"
@@ -140,7 +137,7 @@
                 android:layout_height="100dp"
                 android:layout_marginBottom="10dp"
                 android:id="@+id/text_area_id"
-                />
+                tools:ignore="TextFields" />
 
 
             <ImageView
@@ -149,22 +146,24 @@
                 android:layout_gravity="center_horizontal"
                 android:id="@+id/browse_image_id"
                 android:layout_marginBottom="10dp"
-                />
+                tools:ignore="ContentDescription" />
 
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:text="Browse"
+                android:text="@string/browse"
                 android:layout_marginBottom="10dp"
                 android:id="@+id/browseid"
                 />
             <ImageView
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
+                android:scaleType="fitXY"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
                 android:layout_gravity="center_horizontal"
-                android:id="@+id/cameraviewid"/>
+                android:id="@+id/cameraviewid"
+                tools:ignore="ContentDescription" />
 
             <ImageButton
                 android:layout_width="46dp"
@@ -174,25 +173,27 @@
                 android:src="@drawable/index"
                 android:scaleType="fitXY"
                 android:layout_marginBottom="10dp"
-                />
+                tools:ignore="ContentDescription" />
 
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/expectedid"
                 android:layout_marginBottom="10dp"
-                android:hint="Expected Quote in USD"
+                android:hint="@string/expected_quote_in_usd"
                 />
 
 
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="SUBMIT"
+                android:text="@string/submit1"
                 android:id="@+id/submitid"
+                android:background="@drawable/round"
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="10dp"
-                android:layout_marginBottom="10dp"
+                android:textColor="@android:color/white"
+                android:layout_marginBottom="30dp"
                 android:layout_marginTop="10dp"
 
 
@@ -221,7 +222,7 @@
 
 
 
-    </RelativeLayout>
+
 
 
 </LinearLayout>

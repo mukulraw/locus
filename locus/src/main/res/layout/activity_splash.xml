@@ -4,15 +4,15 @@
     android:layout_width="match_parent"
     android:orientation="vertical"
     android:layout_height="match_parent"
-    android:background="@drawable/cool1" 
-    >
+    android:background="@drawable/cool1"
+    tools:ignore="Overdraw">
 
     <!-- Header aligned to top -->
 
     <RelativeLayout
         android:id="@+id/header"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="?android:attr/actionBarSize"
         android:background="#6699FF"
         android:gravity="center" >
 
@@ -47,12 +47,13 @@
         android:textStyle="normal"
         android:layout_marginTop="10dp"
         android:textSize="13sp"
-        android:drawableLeft="@drawable/ic_user"
+        android:drawableStart="@drawable/ic_user"
         android:drawablePadding="10dp"
         android:hint="@string/screen_name1"
         android:inputType="textPersonName"
         android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"/>
+        android:layout_marginRight="10dp"
+        android:drawableLeft="@drawable/ic_user" />
 
 
 

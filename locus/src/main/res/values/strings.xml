@@ -62,7 +62,7 @@
     <string name="all_rights_reserved_">All Rights Reserved ?</string>
     <string name="GPSAlertDialogMessage">GPSAlertDialogMessage</string>
     <string name="GPSAlertDialogTitle">GPSAlertDialogTitle</string>
-    <string name="cancel">cancel</string>
+    <string name="cancel">Cancel</string>
 
 
     <string name="chat_fragment_title">Chat (fragment)</string>
@@ -90,6 +90,20 @@
     <string name="password1">Password</string>
     <string name="login">LOGIN</string>
     <string name="all_rights_reserved1">All Rights Reserved ?</string>
+    <string name="submit_your_requirements">Submit your requirements</string>
+    <string name="your_name">Your name*</string>
+    <string name="your_email">Your Email*</string>
+    <string name="your_phone">Your phone*</string>
+    <string name="select_country">--Select Country--</string>
+    <string name="select_subject">--Select Subject--</string>
+    <string name="select_grade">--Select Grade--</string>
+    <string name="select_reference">--Select Reference--</string>
+    <string name="last_date_of_submission">Last date of submission*</string>
+    <string name="browse">Browse</string>
+    <string name="submit1">SUBMIT</string>
+    <string name="expected_quote_in_usd">Expected Quote in USD</string>
+    <string name="enter_your_email_id">Enter Your Email ID</string>
+    <string name="filename">Filename</string>
 
 
 </resources>

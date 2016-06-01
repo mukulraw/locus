@@ -6,8 +6,9 @@ import android.util.Log;
 import com.zopim.android.sdk.api.ZopimChat;
 import com.zopim.android.sdk.model.VisitorInfo;
 
-public class SampleApplication extends Application {
 
+
+public class SampleApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
@@ -56,4 +57,5 @@ public class SampleApplication extends Application {
         ZopimChat.setVisitorInfo(emptyVisitorInfo);
         Log.v("Zopim Chat Sample", "Visitor info erased.");
     }
+
 }

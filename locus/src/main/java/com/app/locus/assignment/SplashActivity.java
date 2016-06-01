@@ -1,8 +1,9 @@
 package com.app.locus.assignment;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.ListActivity;
+
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -34,7 +35,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
-import java.util.HashMap;
+
 import java.util.List;
  
  
@@ -45,10 +46,10 @@ public class SplashActivity extends Activity implements OnClickListener{
     private EditText editTextUserName;
     private EditText editTextPassword;
     
-    private TextView tvRegistration;
-	private TextView tvForgotPassword;
+
+
  
-    public static final String MyPREFERENCES="MyPrefs";
+
     public static final String USER_NAME = "USERNAME";
 
     String email;
@@ -61,7 +62,7 @@ public class SplashActivity extends Activity implements OnClickListener{
     JSONObject jObj = null;
     String result = null;
     private static final String FORGOT_URL = "http://www.kickassassignmenthelp.com/wp-content/themes/assignment/lost-data.php";
-    //http://www.kickassassignmenthelp.com/wp-content/themes/assignment/lost-data.php
+
  
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -71,11 +72,10 @@ public class SplashActivity extends Activity implements OnClickListener{
         editTextUserName = (EditText) findViewById(R.id.et_userName);
         editTextPassword = (EditText) findViewById(R.id.et_password);
 
-        //editTextemail=(EditText)findViewById(R.id.et_email);
+
         
-        
-    	tvRegistration = (TextView) findViewById(R.id.tv_register);
-		tvForgotPassword = (TextView) findViewById(R.id.tv_forgotPassword);
+    	TextView tvRegistration = (TextView) findViewById(R.id.tv_register);
+		TextView tvForgotPassword = (TextView) findViewById(R.id.tv_forgotPassword);
 		
 		tvRegistration.setOnClickListener(this);
 		tvForgotPassword.setOnClickListener(new OnClickListener() {
@@ -95,20 +95,18 @@ public class SplashActivity extends Activity implements OnClickListener{
     
     private void showInputDialog() {
 		// TODO Auto-generated method stub
-    	// get prompts.xml view
+
     			LayoutInflater layoutInflater = LayoutInflater.from(SplashActivity.this);
-    			View promptView = layoutInflater.inflate(R.layout.dialog_signin, null);
+    			@SuppressLint("InflateParams") View promptView = layoutInflater.inflate(R.layout.dialog_signin, null);
     			AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(SplashActivity.this);
     			alertDialogBuilder.setView(promptView);
 
     			final EditText editTextemail = (EditText) promptView.findViewById(R.id.et_email);
-    			// setup a dialog window
+
         final AlertDialog.Builder builder = alertDialogBuilder.setCancelable(false)
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        //editTextUserName.setText("Hello, " + editTextUserName.getText().toString());
-                        //String gh = editTextUserName.getText().toString();
-                        //Toast.makeText(getApplicationContext(), "hell0"+gh,  Toast.LENGTH_SHORT).show();
+
                         email = editTextemail.getText().toString().trim();
 
                        // Toast.makeText(getApplicationContext(), "hell0"+email,  Toast.LENGTH_SHORT).show();
@@ -150,12 +148,7 @@ public class SplashActivity extends Activity implements OnClickListener{
                                                    loading = ProgressDialog.show(Register.this, "Please Wait",null, true, true);
                                                }
                                     */
-        /*
-         * (non-Javadoc)
-         * @see android.os.AsyncTask#onPreExecute()
-         *
-         * This method is called before doInBackground method is called.
-         */
+
                             @Override
                             protected void onPreExecute() {
                                 super.onPreExecute();
@@ -166,13 +159,7 @@ public class SplashActivity extends Activity implements OnClickListener{
 
                             }
 
-                            /*
-                             * (non-Javadoc)
-                             * @see android.os.AsyncTask#onPostExecute(java.lang.Object)
-                             *
-                             * This method is called after doInBackground method completes processing.
-                             * Result from doInBackground is passed to this method.
-                             */
+
                             @Override
                             protected void onPostExecute(String s) {
                                 super.onPostExecute(s);
@@ -184,18 +171,10 @@ public class SplashActivity extends Activity implements OnClickListener{
 
                             }
 
-                            /*
-                             * (non-Javadoc)
-                             * @see android.os.AsyncTask#doInBackground(Params[])
-                             *
-                             * Code performing long running operation goes in this method.
-                             * When onClick method is executed on click of button,
-                             * it calls execute method which accepts parameters and automatically calls doInBackground method with the parameters passed.
-                             */
                             @Override
                             protected String doInBackground(String... params) {
 
-                              //  HashMap<String, String> data = new HashMap<String, String>();
+
 
                                 List<NameValuePair> data = new ArrayList<NameValuePair>();
                                 data.add(new BasicNameValuePair("email" , params[0]));
@@ -210,10 +189,6 @@ public class SplashActivity extends Activity implements OnClickListener{
                                     is = entity.getContent();
 
 
-                                } catch (UnsupportedEncodingException e) {
-                                    e.printStackTrace();
-                                } catch (ClientProtocolException e) {
-                                    e.printStackTrace();
                                 } catch (IOException e) {
                                     e.printStackTrace();
                                 }
@@ -223,7 +198,7 @@ public class SplashActivity extends Activity implements OnClickListener{
                                     BufferedReader reader = new BufferedReader(new InputStreamReader(
                                             is, "utf-8"), 8);
                                     StringBuilder sb = new StringBuilder();
-                                    String line = null;
+                                    String line;
                                     while ((line = reader.readLine()) != null) {
                                         sb.append(line).append("\n");
                                     }
@@ -287,7 +262,7 @@ public class SplashActivity extends Activity implements OnClickListener{
 
 
 
-        publicvarr.name=name;
+
 
 
 
@@ -338,7 +313,7 @@ public class SplashActivity extends Activity implements OnClickListener{
             	String name = params[0];
                 String password = params[1];
  
-                InputStream is = null;
+                InputStream is;
                 List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
                 nameValuePairs.add(new BasicNameValuePair("name", name));
                 nameValuePairs.add(new BasicNameValuePair("password", password));
@@ -361,16 +336,12 @@ public class SplashActivity extends Activity implements OnClickListener{
                     BufferedReader reader = new BufferedReader(new InputStreamReader(is, "UTF-8"), 8);
                     StringBuilder sb = new StringBuilder();
  
-                    String line = null;
+                    String line;
                     while ((line = reader.readLine()) != null)
                     {
-                        sb.append(line + "\n");
+                        sb.append(line).append("\n");
                     }
                     result = sb.toString();
-                } catch (ClientProtocolException e) {
-                    e.printStackTrace();
-                } catch (UnsupportedEncodingException e) {
-                    e.printStackTrace();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

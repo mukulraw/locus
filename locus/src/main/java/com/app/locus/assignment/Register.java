@@ -5,7 +5,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.provider.Settings;
+
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -13,48 +13,43 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.app.locus.utils.Util;
+import com.app.locus.assignment.Util;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+
 import java.util.List;
 
 public class Register extends Activity implements View.OnClickListener{
  
-	/*
-	 * using for initi
-	 */
+
     private EditText etUserName;
 	private EditText etMobileno;
 	private EditText etEmailid;
 	private EditText etPassword;
-	
-	private TextView tvlogin;
-	
-	private Button buttonRegister;
- 
+
+
     private static final String REGISTER_URL = "http://www.kickassassignmenthelp.com/wp-content/themes/assignment/app-save.php";
- 
- 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.register2);
         
-        /*
-         * using for making the control
-         */
- 
+
+
+
+
          etUserName   = (EditText) findViewById(R.id.et_userName);
 		 etMobileno   = (EditText) findViewById(R.id.et_mobileNumber);
 		 etEmailid    = (EditText) findViewById(R.id.et_emailId);
 		 etPassword   = (EditText) findViewById(R.id.et_password);
-       
-		 buttonRegister = (Button) findViewById(R.id.registerBtn);
-		 tvlogin = (TextView) findViewById(R.id.tv_login);
+
+        Button buttonRegister = (Button) findViewById(R.id.registerBtn);
+		TextView tvlogin = (TextView) findViewById(R.id.tv_login);
         
          buttonRegister.setOnClickListener(this);
          tvlogin.setOnClickListener(this);
@@ -84,13 +79,16 @@ public class Register extends Activity implements View.OnClickListener{
  /*
   * using the methode for calling the value data
   */
+
+
+
     private void registerUser() {
         String name  = etUserName.getText().toString().trim().toLowerCase();
         String mobile= etMobileno.getText().toString().trim().toLowerCase();
         String email = etEmailid.getText().toString().trim().toLowerCase();
         String password = etPassword.getText().toString().trim().toLowerCase();
        
-       
+
         if(name.length()==0){
             Toast.makeText(Register.this,"Please Enter Your Name",Toast.LENGTH_SHORT).show();
         }else if(mobile.length()==0){
@@ -102,7 +100,7 @@ public class Register extends Activity implements View.OnClickListener{
         }else if(password.length()==0){
             Toast.makeText(Register.this,"Please Enter Your Password",Toast.LENGTH_SHORT).show();
         }
-        
+
         else{
 
             ConnectionDetector cd = new ConnectionDetector(getBaseContext());
@@ -122,6 +120,7 @@ public class Register extends Activity implements View.OnClickListener{
      * AsyncTask is an abstract class. which helps us to use the UI thread properly.
      */
     private void register(String name, String mobile, String email, final String password) {
+        @SuppressWarnings("deprecation")
         class RegisterUser extends AsyncTask<String, Void, String>{
             ProgressDialog loading;
             RegisterUserClass ruc = new RegisterUserClass();
@@ -178,7 +177,7 @@ public class Register extends Activity implements View.OnClickListener{
                 */
 
 
-                List<NameValuePair> data = new ArrayList<NameValuePair>();
+                List<NameValuePair> data = new ArrayList<>();
                 data.add(new BasicNameValuePair("name" , params[0]));
                 data.add(new BasicNameValuePair("email" , params[1]));
                 data.add(new BasicNameValuePair("mobile" , params[2]));
@@ -205,7 +204,16 @@ public class Register extends Activity implements View.OnClickListener{
                 super.onPostExecute(s);
                 loading.dismiss();
 
-                Toast.makeText(getApplicationContext(),result, Toast.LENGTH_LONG).show();
+
+                String a = "You are register successfully";
+                //noinspection StatementWithEmptyBody
+                if (result.equals(a));
+                {
+                    Toast.makeText(getApplicationContext(),"You have registered successfully", Toast.LENGTH_LONG).show();
+                }
+
+
+
                 etUserName.setText("");
                 etMobileno.setText("");
                 etEmailid.setText("");

@@ -3,12 +3,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.app.locus.assignment">
 
+
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_INTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+
+
 
     <uses-feature android:name="android.hardware.camera" />
 
@@ -21,6 +25,7 @@
         android:smallScreens="true"
         android:xlargeScreens="true" />
 
+    <!--suppress AndroidDomInspection -->
     <application
         android:name=".SampleApplication"
         android:allowBackup="true"
@@ -42,7 +47,6 @@
         <activity
             android:name=".SplashActivity"
             android:label="@string/title_activity_index"
-            android:parentActivityName=".Flipper"
             android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -51,7 +55,6 @@
         <activity
             android:name=".Register"
             android:label="@string/title_activity_index"
-            android:parentActivityName=".Flipper"
             android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -60,29 +63,13 @@
         <activity
             android:name=".Firstpage"
             android:label="@string/title_activity_index"
-            android:parentActivityName=".SplashActivity"
             android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.app.locus.assignment.SplashActivity" />
         </activity>
-        <activity
-            android:name=".Test"
-            android:label="@string/title_activity_index"
-            android:screenOrientation="portrait"/>
-        <activity
-            android:name=".FilePicker"
-            android:screenOrientation="portrait" />
 
         <!--         <activity android:name=".EntryActivity"></activity> -->
-        <activity
-            android:name=".MainActivity"
-            android:label="@string/title_activity_index"
-            android:screenOrientation="portrait">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.app.locus.assignment.Firstpage" />
-        </activity>
         <!--
              ATTENTION: This was auto-generated to add Google Play services to your project for
              App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information.

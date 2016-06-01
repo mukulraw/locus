@@ -1,23 +1,28 @@
 package com.app.locus.assignment;
 
 import java.io.ByteArrayOutputStream;
+
 import java.io.File;
 import java.io.IOException;
+
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
-import java.util.Objects;
 
 import android.app.Activity;
+import android.content.ContentUris;
 import android.content.Context;
+import android.content.CursorLoader;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.graphics.Bitmap;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
+
+import android.graphics.BitmapFactory;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
@@ -25,8 +30,11 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
+
 import android.os.Environment;
+import android.provider.DocumentsContract;
 import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
 import android.util.Base64;
@@ -41,6 +49,9 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.google.android.gms.appindexing.AndroidAppUri;
+import com.squareup.picasso.RequestHandler;
+
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 
@@ -53,6 +64,7 @@ public class Assignment extends Activity implements View.OnClickListener, Locati
     ImageButton camera;
     ImageView browse_image, camera_image;
     Button submit, browser;
+    String mCurrentPhotoPath;
 
 
     String POST_URL = "http://www.kickassassignmenthelp.com/wp-content/themes/assignment/assignment-save.php";
@@ -111,19 +123,30 @@ public class Assignment extends Activity implements View.OnClickListener, Locati
     private int PICK_IMAGE_REQUEST = 1;
     private int CAPTURE_IMAGE_REQUEST = 2;
 
-    Uri fileUri;
 
-    public static final int MEDIA_TYPE_IMAGE = 1;
-    public static final int MEDIA_TYPE_VIDEO = 2;
+
+
+    String NewSelectedImageURL , CapturedImageURL;
+
     Bitmap bitmap;
 
+    Bitmap photo;
 
     String strAddress;
+    Uri uri;
+
 
     Location current;
 
 
     String bo, cm;
+
+    File ph;
+
+
+    String path;
+
+    Intent mintent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -187,7 +210,7 @@ public class Assignment extends Activity implements View.OnClickListener, Locati
 
             }
         });
-        ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(this , R.layout.simple_spinner_item , listSpinner1);
+        ArrayAdapter<String> adapter1 = new ArrayAdapter<>(this, R.layout.simple_spinner_item, listSpinner1);
         _country.setAdapter(adapter1);
 
    //     subject.setOnItemClickListener(this);
@@ -203,7 +226,7 @@ public class Assignment extends Activity implements View.OnClickListener, Locati
 
             }
         });
-        ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(this , R.layout.simple_spinner_item , listSpinner2);
+        ArrayAdapter<String> adapter2 = new ArrayAdapter<>(this, R.layout.simple_spinner_item, listSpinner2);
         _subject.setAdapter(adapter2);
 
   //      grade.setOnItemClickListener(this);
@@ -219,7 +242,7 @@ public class Assignment extends Activity implements View.OnClickListener, Locati
 
             }
         });
-        ArrayAdapter<String> adapter3 = new ArrayAdapter<String>(this , R.layout.simple_spinner_item , listSpinner3);
+        ArrayAdapter<String> adapter3 = new ArrayAdapter<>(this, R.layout.simple_spinner_item, listSpinner3);
         _grade.setAdapter(adapter3);
 
   //      reference.setOnItemClickListener(this);
@@ -235,7 +258,7 @@ public class Assignment extends Activity implements View.OnClickListener, Locati
 
             }
         });
-        ArrayAdapter<String> adapter4 = new ArrayAdapter<String>(this , R.layout.simple_spinner_item , listSpinner4);
+        ArrayAdapter<String> adapter4 = new ArrayAdapter<>(this, R.layout.simple_spinner_item, listSpinner4);
         _reference.setAdapter(adapter4);
 
 
@@ -254,66 +277,80 @@ public class Assignment extends Activity implements View.OnClickListener, Locati
     public void onClick(View v) {
 
 
-
-        if (v==browser) {
+        if (v == browser) {
             Intent intent = new Intent();
-            intent.setType("image/*");
+
             intent.setAction(Intent.ACTION_GET_CONTENT);
+            intent.setType("image/*");
             startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST);
 
         }
 
 
-        if (v==camera)
-        {
+        if (v == camera) {
 
-         //   Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-          //  fileUri = getOutputMediaFileUri(MEDIA_TYPE_IMAGE);
-          //  intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri);
+            Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            // Ensure that there's a camera activity to handle the intent
+            if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+                // Create the File where the photo should go
+                File photoFile = null;
+                try {
+                    photoFile = createImageFile();
+                } catch (IOException ex) {
+                    // Error occurred while creating the File
+                    ex.printStackTrace();
+                }
+                // Continue only if the File was successfully created
+                if (photoFile != null) {
+                    takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT,
+                            Uri.fromFile(photoFile));
+                    startActivityForResult(takePictureIntent, CAPTURE_IMAGE_REQUEST);
+                }
 
-           // startActivityForResult(intent , CAPTURE_IMAGE_REQUEST);
+            }
+        }
 
 
+            if (v == submit) {
 
-            Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-            //File photo = new File(Environment.getExternalStorageDirectory(),  "Pic.jpg");
-           // intent.putExtra(MediaStore.EXTRA_OUTPUT,
-           //         Uri.fromFile(photo));
-           // fileUri = Uri.fromFile(photo);
-            //fileUri = getOutputMediaFileUri(MEDIA_TYPE_IMAGE);
+                bean.setName(String.valueOf(_name.getText()));
+                bean.setEmail(String.valueOf(_email.getText()));
+                bean.setPhone(String.valueOf(_phone.getText()));
+                bean.setLast_date(String.valueOf(_last_date.getText()));
+                bean.setArea_text(String.valueOf(_text_area.getText()));
+                bean.setExpected(String.valueOf(_expected.getText()));
+                bean.setLocation(String.valueOf(current.getLatitude()) + String.valueOf(current.getLongitude()));
 
-            //intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri);
-            startActivityForResult(intent, CAPTURE_IMAGE_REQUEST);
+
+                Log.d("asdasdasd", String.valueOf(current.getLatitude()) + String.valueOf(current.getLongitude()));
+
+
+                new upload(bean).execute();
+
+            }
 
         }
 
 
-        if(v==submit)
-        {
-
-            bean.setName(String.valueOf(_name.getText()));
-            bean.setEmail(String.valueOf(_email.getText()));
-            bean.setPhone(String.valueOf(_phone.getText()));
-            bean.setLast_date(String.valueOf(_last_date.getText()));
-            bean.setArea_text(String.valueOf(_text_area.getText()));
-            bean.setExpected(String.valueOf(_expected.getText()));
-            bean.setLocation(String.valueOf(current.getLatitude()) + String.valueOf(current.getLongitude()));
 
 
-            Log.d("asdasdasd" , String.valueOf(current.getLatitude()) + String.valueOf(current.getLongitude()));
 
+    private File createImageFile() throws IOException {
+        // Create an image file name
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        String imageFileName = "JPEG_" + timeStamp + "_";
+        File storageDir = Environment.getExternalStoragePublicDirectory(
+                Environment.DIRECTORY_PICTURES);
+        File image = File.createTempFile(
+                imageFileName,  /* prefix */
+                ".jpg",         /* suffix */
+                storageDir      /* directory */
+        );
 
-            new upload(bean).execute();
-
-        }
-
-
+        // Save a file: path for use with ACTION_VIEW intents
+        mCurrentPhotoPath = "file:" + image.getAbsolutePath();
+        return image;
     }
-
-
-
-
-
 
 
     @Override
@@ -326,12 +363,31 @@ public class Assignment extends Activity implements View.OnClickListener, Locati
                 bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), Uri.parse(String.valueOf(data.getData())));
                 browse_image.setVisibility(View.VISIBLE);
                 browse_image.setImageBitmap(bitmap);
+                Uri selectedImageUri = data.getData();
+
                 //bean.setBrowse(bitmap);
 
-                String bit = getStringImage(bitmap);
-                bean.setBrowse(bit);
-                bo = bit;
-                Log.d("asdasdasd" , bit);
+
+
+                path = getPath(getApplicationContext() , selectedImageUri);
+
+                //path = selectedImageUri.getPath();
+
+                //path = String.valueOf(selectedImageUri);
+                Log.d("asdasdasd" , String.valueOf(selectedImageUri));
+                Log.d("asdasdasd" , path);
+
+                //Log.d("asdasdasd" , path);
+                //ph = new File(path);
+
+
+                //uri = getImageUri(getApplicationContext() , bitmap);
+
+
+                //String bit = getStringImage(bitmap);
+                //bean.setBrowse(bit);
+                //bo = bit;
+                //Log.d("asdasdasd" , bit);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -343,23 +399,18 @@ public class Assignment extends Activity implements View.OnClickListener, Locati
             if (data != null) {
 
 
+               Log.d("asdasdasd" , "image saved");
+                setPic();
 
+                //Uri selectedImageUri = data.getData();
+                //String p = getRealPathFromURI(selectedImageUri);
 
-
-
-
-
-            //   photo = (Bitmap) data.getExtras().get("data");
-
-
-             //   Uri tempUri = getImageUri(getApplicationContext(), photo);
-
-            //    Log.d("asdasdasd" , getRealPathFromURI(tempUri));
+                //Log.d("asasdsad" , String.valueOf(selectedImageUri));
 
               //  bean.setCamera(new File(getRealPathFromURI(tempUri)));
 
 
-                Bitmap cam = (Bitmap) data.getExtras().get("data");
+                /*Bitmap cam = (Bitmap) data.getExtras().get("data");
 
                 String cams = getStringImage(cam);
 
@@ -371,26 +422,205 @@ public class Assignment extends Activity implements View.OnClickListener, Locati
                 camera_image.setVisibility(View.VISIBLE);
                 camera_image.setImageBitmap((Bitmap) data.getExtras().get("data"));
 
+                */
 
 
-
-
-
-
-
-
-
-
+               // uri = data.getData();
+               // if (uri == null && CapturedImageURL != null)
+               // {
+               //     uri = Uri.fromFile(new File(CapturedImageURL));
+               // }
+                //ph = new File(CapturedImageURL);
+                //if (!ph.exists()) {
+                //    ph.mkdir();
+                //    sendBroadcast(new Intent(Intent.ACTION_MEDIA_MOUNTED, Uri.parse("file://"+Environment.getExternalStorageDirectory())));
+               // }
                 }
         }
     }
 
 
+
+    public static String getPath(final Context context, final Uri uri)
+    {
+        final boolean isKitKatOrAbove = Build.VERSION.SDK_INT >=  Build.VERSION_CODES.KITKAT;
+
+        // DocumentProvider
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            if (isKitKatOrAbove && DocumentsContract.isDocumentUri(context, uri)) {
+                // ExternalStorageProvider
+                if (isExternalStorageDocument(uri)) {
+                    final String docId = DocumentsContract.getDocumentId(uri);
+                    final String[] split = docId.split(":");
+                    final String type = split[0];
+
+                    if ("primary".equalsIgnoreCase(type)) {
+                        return Environment.getExternalStorageDirectory() + "/" + split[1];
+                    }
+
+                    // TODO handle non-primary volumes
+                }
+                // DownloadsProvider
+                else if (isDownloadsDocument(uri)) {
+
+                    final String id = DocumentsContract.getDocumentId(uri);
+                    final Uri contentUri = ContentUris.withAppendedId(
+                            Uri.parse("content://downloads/public_downloads"), Long.valueOf(id));
+
+                    return getDataColumn(context, contentUri, null, null);
+                }
+                // MediaProvider
+                else if (isMediaDocument(uri)) {
+                    final String docId = DocumentsContract.getDocumentId(uri);
+                    final String[] split = docId.split(":");
+                    final String type = split[0];
+
+                    Uri contentUri = null;
+                    if ("image".equals(type)) {
+                        contentUri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI;
+                    } else if ("video".equals(type)) {
+                        contentUri = MediaStore.Video.Media.EXTERNAL_CONTENT_URI;
+                    } else if ("audio".equals(type)) {
+                        contentUri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
+                    }
+
+                    final String selection = "_id=?";
+                    final String[] selectionArgs = new String[] {
+                            split[1]
+                    };
+
+                    return getDataColumn(context, contentUri, selection, selectionArgs);
+                }
+            }
+            // MediaStore (and general)
+            else if ("content".equalsIgnoreCase(uri.getScheme())) {
+                return getDataColumn(context, uri, null, null);
+            }
+            // File
+            else if ("file".equalsIgnoreCase(uri.getScheme())) {
+                return uri.getPath();
+            }
+        }
+
+        return null;
+    }
+
+    private void setPic() {
+        // Get the dimensions of the View
+        int targetW = camera_image.getWidth();
+        int targetH = camera_image.getHeight();
+
+        // Get the dimensions of the bitmap
+        BitmapFactory.Options bmOptions = new BitmapFactory.Options();
+        bmOptions.inJustDecodeBounds = true;
+        BitmapFactory.decodeFile(mCurrentPhotoPath, bmOptions);
+        int photoW = bmOptions.outWidth;
+        int photoH = bmOptions.outHeight;
+
+        // Determine how much to scale down the image
+        int scaleFactor = Math.min(photoW/targetW, photoH/targetH);
+
+        // Decode the image file into a Bitmap sized to fill the View
+        bmOptions.inJustDecodeBounds = false;
+        bmOptions.inSampleSize = scaleFactor;
+        bmOptions.inPurgeable = true;
+
+        Bitmap bitmap = BitmapFactory.decodeFile(mCurrentPhotoPath, bmOptions);
+        camera_image.setImageBitmap(bitmap);
+    }
+
+
+    public static String getDataColumn(Context context, Uri uri, String selection,
+                                       String[] selectionArgs) {
+
+        Cursor cursor = null;
+        final String column = "_data";
+        final String[] projection = {
+                column
+        };
+
+        try {
+            cursor = context.getContentResolver().query(uri, projection, selection, selectionArgs,
+                    null);
+            if (cursor != null && cursor.moveToFirst()) {
+                final int column_index = cursor.getColumnIndexOrThrow(column);
+                return cursor.getString(column_index);
+            }
+        } finally {
+            if (cursor != null)
+                cursor.close();
+        }
+        return null;
+    }
+
+
+    /**
+     * @param uri The Uri to check.
+     * @return Whether the Uri authority is ExternalStorageProvider.
+     */
+    public static boolean isExternalStorageDocument(Uri uri) {
+        return "com.android.externalstorage.documents".equals(uri.getAuthority());
+    }
+
+    /**
+     * @param uri The Uri to check.
+     * @return Whether the Uri authority is DownloadsProvider.
+     */
+    public static boolean isDownloadsDocument(Uri uri) {
+        return "com.android.providers.downloads.documents".equals(uri.getAuthority());
+    }
+
+    /**
+     * @param uri The Uri to check.
+     * @return Whether the Uri authority is MediaProvider.
+     */
+    public static boolean isMediaDocument(Uri uri) {
+        return "com.android.providers.media.documents".equals(uri.getAuthority());
+    }
+
+
+
+    public Uri getImageUri(Context inContext, Bitmap inImage) {
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+        String path = MediaStore.Images.Media.insertImage(inContext.getContentResolver(), inImage, "Title", null);
+        return Uri.parse(path);
+    }
+
+    public String getRealPathFromURI(Uri contentUri)
+    {
+        try
+        {
+            String[] proj = {MediaStore.Images.Media.DATA};
+            Cursor cursor = managedQuery(contentUri, proj, null, null, null);
+            int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+            cursor.moveToFirst();
+            return cursor.getString(column_index);
+        }
+        catch (Exception e)
+        {
+            return contentUri.getPath();
+        }
+    }
     public String getStringImage(Bitmap bmp){
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         bmp.compress(Bitmap.CompressFormat.JPEG, 100, baos);
         byte[] imageBytes = baos.toByteArray();
         return Base64.encodeToString(imageBytes, Base64.DEFAULT);
+    }
+
+
+
+    public String getPathFromURI(Uri contentUri) {
+        String res = null;
+        String[] proj = {MediaStore.Images.Media.DATA};
+        Cursor cursor = getContentResolver().query(contentUri, proj, null, null, null);
+        if (cursor.moveToFirst()) {
+            int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+            res = cursor.getString(column_index);
+        }
+        cursor.close();
+        return res;
     }
 
     @Override
@@ -417,8 +647,6 @@ public class Assignment extends Activity implements View.OnClickListener, Locati
     private class upload extends AsyncTask<Void , Void , Void>
     {
 
-        RegisterUserClass ruc = new RegisterUserClass();
-
         String result = "";
 
         String name , email , phone , country , subject , grade , reference , last_date , area_text , expected , location;
@@ -443,10 +671,22 @@ public class Assignment extends Activity implements View.OnClickListener, Locati
 
         @Override
         protected Void doInBackground(Void... params) {
+            RegisterUserClass ruc = new RegisterUserClass();
+            Geocoder g = new Geocoder(getApplicationContext());
+            try {
+                List<Address> addresses = g.getFromLocation(current.getLatitude() , current.getLongitude() , 5);
+                Address address = addresses.get(0);
+                strAddress = "Name: " + address + "\n" +
+                        "Sub-Admin Areas: " + address.getSubAdminArea() + "\n" +
+                        "Admin Area: " + address.getAdminArea() + "\n" +
+                        "Country: " + address.getCountryName() + "\n" +
+                        "Country Code: " + address.getCountryCode() + "\n";
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
 
-
-            /*
-            List<NameValuePair> data = new ArrayList<NameValuePair>();
+/*
+            List<NameValuePair> data = new ArrayList<>();
             data.add(new BasicNameValuePair("name" , name));
             data.add(new BasicNameValuePair("email" , email));
             data.add(new BasicNameValuePair("phone" , phone));
@@ -457,30 +697,20 @@ public class Assignment extends Activity implements View.OnClickListener, Locati
             data.add(new BasicNameValuePair("lastdateofsubmission" , last_date));
             data.add(new BasicNameValuePair("textarea" , area_text));
             data.add(new BasicNameValuePair("paexpect" , expected));
-            data.add(new BasicNameValuePair("location" , "12"));
+            data.add(new BasicNameValuePair("location" , strAddress));
             data.add(new BasicNameValuePair("browse" , browse));
             data.add(new BasicNameValuePair("camera" , camera));
 
             result = ruc.sendPostRequest(POST_URL , data);
+
+
 */
 
-            Geocoder g = new Geocoder(getApplicationContext());
-            try {
-                List<Address> addresses = g.getFromLocation(current.getLatitude() , current.getLongitude() , 5);
-                Address address = addresses.get(0);
-                StringBuffer str = new StringBuffer();
-                str.append("Name: ").append(address).append("\n");
-                str.append("Sub-Admin Areas: ").append(address.getSubAdminArea()).append("\n");
-                str.append("Admin Area: ").append(address.getAdminArea()).append("\n");
-                str.append("Country: ").append(address.getCountryName()).append("\n");
-                str.append("Country Code: ").append(address.getCountryCode()).append("\n");
-                strAddress = str.toString();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
 
 
-            HashMap<String , String> info = new HashMap<>();
+
+
+     /*       HashMap<String , String> info = new HashMap<>();
 
             info.put("name" , name);
             info.put("email" , email);
@@ -499,23 +729,26 @@ public class Assignment extends Activity implements View.OnClickListener, Locati
 
             RequestHandler handler = new RequestHandler();
             result = handler.sendPostRequest(POST_URL , info);
+*/
 
 
+            //File f = new File(getRealPathFromURI(uri));
 
 
+            String requestURL = "http://www.kickassassignmenthelp.com/wp-content/themes/assignment/assignment-save.php";
 
-     /*       String requestURL = "http://www.kickassassignmenthelp.com/wp-content/themes/assignment/assignment-save.php";
+            File f = null;
+            f = new File(path);
+            //File f2 = new File(mCurrentPhotoPath);
 
             try {
                 MultipartUtility multipart = new MultipartUtility(requestURL, "UTF-8");
 
-                //multipart.addHeaderField("User-Agent", "CodeJava");
-               // multipart.addHeaderField("Test-Header", "Header-Value");
-
+                multipart.addHeaderField("User-Agent", "CodeJava");
+                multipart.addHeaderField("Test-Header", "Header-Value");
                 multipart.addFormField("name", name);
                 multipart.addFormField("email", email);
                 multipart.addFormField("phone", phone);
-
                 multipart.addFormField("country", country);
                 multipart.addFormField("subject", subject);
                 multipart.addFormField("pagrade", grade);
@@ -523,9 +756,9 @@ public class Assignment extends Activity implements View.OnClickListener, Locati
                 multipart.addFormField("lastdateofsubmission", last_date);
                 multipart.addFormField("textarea", area_text);
                 multipart.addFormField("paexpect", expected);
-                multipart.addFilePart("browse", browse);
-                multipart.addFormField("location", "13");
-                multipart.addFilePart("camera", camera);
+                multipart.addFormField("location", strAddress);
+                multipart.addFilePart("browse", f);
+                multipart.addFilePart("camera", f);
 
 
                 // multipart.addFilePart("fileUpload", uploadFile2);
@@ -538,13 +771,14 @@ public class Assignment extends Activity implements View.OnClickListener, Locati
                     System.out.println(line);
                     result = line;
                 }
+                Log.d("asdasdasd" , result);
 
 
             } catch (IOException ex) {
                 System.err.println("-----------error" + ex);
             }
 
-*/
+
 
 
 

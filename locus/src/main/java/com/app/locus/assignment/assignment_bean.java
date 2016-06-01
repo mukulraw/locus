@@ -1,8 +1,6 @@
 package com.app.locus.assignment;
 
-import android.graphics.Bitmap;
 
-import java.io.File;
 
 
 public class assignment_bean {

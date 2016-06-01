@@ -24,7 +24,7 @@
     style="?android:attr/spinnerItemStyle"
     android:textColor="#B6B6B4"
     android:textSize="14sp"
-    android:padding="5px"
+    android:padding="5dp"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     />

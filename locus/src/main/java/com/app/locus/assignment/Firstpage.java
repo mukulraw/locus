@@ -14,27 +14,27 @@ import android.widget.TextView;
 import com.zopim.android.sdk.api.ZopimChat;
 import com.zopim.android.sdk.prechat.PreChatForm;
 import com.zopim.android.sdk.prechat.ZopimChatActivity;
-import com.zopim.android.sdk.model.VisitorInfo;
 
+
+@SuppressWarnings("ALL")
 public class Firstpage extends Activity {
 
-	private TextView textview;
-	private static long back_pressed;
-	private static final int TIME_DELAY = 2000;
+
+
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.layout_flipper);
 		  Intent intent = getIntent();
-		SharedPreferences preferences = getSharedPreferences(SplashActivity.MyPREFERENCES, Context.MODE_PRIVATE);
+
 	      String username = intent.getStringExtra(SplashActivity.USER_NAME);
-		 // String username1=intent.getStringExtra(Register.USER_NAME);
+
         ZopimChat.init("3wdG5NtNSf8DXdcH5bGhXe2LWQH6U6WL").build();
-		textview=(TextView) findViewById(R.id.textView1);
+		TextView textview=(TextView) findViewById(R.id.textView1);
 		
 		textview.setText(username);
-		//textview.setText(username1);
+
 		
 		}
 
@@ -57,10 +57,10 @@ public class Firstpage extends Activity {
 						Intent logoutIntent = new Intent(Firstpage.this, SplashActivity.class);
 						startActivity(logoutIntent);
 
-						SharedPreferences sharedPreferences = getSharedPreferences(SplashActivity.MyPREFERENCES, Context.MODE_PRIVATE);
-						Editor editor = sharedPreferences.edit();
-						editor.putString("UniqueId", "");
-						editor.commit();
+						//SharedPreferences sharedPreferences = getSharedPreferences(SplashActivity.MyPREFERENCES, Context.MODE_PRIVATE);
+						//Editor editor = sharedPreferences.edit();
+						//editor.putString("UniqueId", "");
+						//editor.apply();
 						finish();
 					}
 				});
