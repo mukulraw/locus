@@ -6,7 +6,6 @@
 
 
     <RelativeLayout
-        android:id="@+id/header"
         android:layout_width="match_parent"
         android:layout_height="?android:actionBarSize"
         android:background="#6699FF"
@@ -29,7 +28,6 @@
 
 
         <Button
-            android:id="@+id/button52"
             style="?android:attr/buttonStyleSmall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -49,7 +47,6 @@
 
 
     <ImageView
-        android:id="@+id/button2"
         android:layout_width="match_parent"
         android:layout_height="?android:actionBarSize"
         android:layout_gravity="center_horizontal"
@@ -74,7 +71,6 @@
                 android:layout_weight="1">
 
                 <Button
-                    android:id="@+id/button3"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/round"
@@ -107,7 +103,6 @@
                 <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/buttonNoConfig"
                     android:onClick="buttonNoConfig"
                     android:background="@drawable/livechat"
                     android:layout_centerHorizontal="true"

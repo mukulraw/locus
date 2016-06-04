@@ -5,7 +5,7 @@ package com.app.locus.assignment;
  * <p/>
  * Account key can be found in Zopim Dashboard at the <a href="https://dashboard.zopim.com/#widget/getting_started">Getting Started Page</a>
  */
-public class AccountKey {
+class AccountKey {
 
     /**
      * Replace this key with your Zopim account key

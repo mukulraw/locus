@@ -15,18 +15,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class MultipartUtility {
+@SuppressWarnings("ALL")
+class MultipartUtility {
 	private final String boundary;
 	private static final String LINE_FEED = "\r\n";
 	private HttpURLConnection httpConn;
-	private String charset;
+	private final String charset;
 	private OutputStream outputStream;
 	private PrintWriter writer;
 
 
-	public MultipartUtility(String requestURL, String charset)
+	public MultipartUtility(String requestURL)
 			throws IOException {
-		this.charset = charset;
+		this.charset = "UTF-8";
 
 
 		boundary = "===" + System.currentTimeMillis() + "===";
@@ -41,7 +42,7 @@ public class MultipartUtility {
 		httpConn.setRequestProperty("User-Agent", "CodeJava Agent");
 		httpConn.setRequestProperty("Test", "Bonjour");
 		outputStream = httpConn.getOutputStream();
-		writer = new PrintWriter(new OutputStreamWriter(outputStream, charset),
+		writer = new PrintWriter(new OutputStreamWriter(outputStream, "UTF-8"),
 				true);
 	}
 
@@ -85,13 +86,13 @@ public class MultipartUtility {
 
 
 	public void addHeaderField(String name, String value) {
-		writer.append(name + ": " + value).append(LINE_FEED);
+		writer.append(name).append(": ").append(value).append(LINE_FEED);
 		writer.flush();
 	}
 
 
 	public List<String> finish() throws IOException {
-		List<String> response = new ArrayList<String>();
+		List<String> response = new ArrayList<>();
 
 		writer.append(LINE_FEED).flush();
 		writer.append("--").append(boundary).append("--").append(LINE_FEED);

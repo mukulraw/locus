@@ -123,7 +123,7 @@ public class Register extends Activity implements View.OnClickListener{
         @SuppressWarnings("deprecation")
         class RegisterUser extends AsyncTask<String, Void, String>{
             ProgressDialog loading;
-            RegisterUserClass ruc = new RegisterUserClass();
+            final RegisterUserClass ruc = new RegisterUserClass();
 
             String result = "";
 

@@ -10,7 +10,6 @@
     <!-- Header aligned to top -->
 
     <RelativeLayout
-        android:id="@+id/header"
         android:layout_width="match_parent"
         android:layout_height="?android:attr/actionBarSize"
         android:background="#6699FF"
@@ -82,7 +81,6 @@
 
 
     <Button
-        android:id="@+id/browse1111"
         style="?android:attr/buttonStyleSmall"
         android:layout_width="match_parent"
         android:layout_marginStart="10dp"

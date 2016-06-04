@@ -20,7 +20,6 @@ import android.widget.Toast;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
-import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
@@ -33,12 +32,12 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 
 import java.util.List;
  
  
+@SuppressWarnings("ALL")
 public class SplashActivity extends Activity implements OnClickListener{
 
     //private  EditText editTextemail;
@@ -52,15 +51,15 @@ public class SplashActivity extends Activity implements OnClickListener{
 
     public static final String USER_NAME = "USERNAME";
 
-    String email;
-    String name;
-    String password;
+    private String email;
+    private String name;
+    private String password;
 
-    InputStream is = null;
+    private InputStream is = null;
 
-    String json = null;
-    JSONObject jObj = null;
-    String result = null;
+    private String json = null;
+    private JSONObject jObj = null;
+    private String result = null;
     private static final String FORGOT_URL = "http://www.kickassassignmenthelp.com/wp-content/themes/assignment/lost-data.php";
 
  
@@ -176,7 +175,7 @@ public class SplashActivity extends Activity implements OnClickListener{
 
 
 
-                                List<NameValuePair> data = new ArrayList<NameValuePair>();
+                                List<NameValuePair> data = new ArrayList<>();
                                 data.add(new BasicNameValuePair("email" , params[0]));
 
 
@@ -314,7 +313,7 @@ public class SplashActivity extends Activity implements OnClickListener{
                 String password = params[1];
  
                 InputStream is;
-                List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+                List<NameValuePair> nameValuePairs = new ArrayList<>();
                 nameValuePairs.add(new BasicNameValuePair("name", name));
                 nameValuePairs.add(new BasicNameValuePair("password", password));
                 

@@ -3,10 +3,21 @@ package com.app.locus.assignment;
 
 
 
-public class assignment_bean {
+class assignment_bean {
 
-    String name , email , phone , country , subject , grade , reference , last_date , area_text , expected , location;
-    String camera , browse;
+    private String name;
+    private String email;
+    private String phone;
+    private String country;
+    private String subject;
+    private String grade;
+    private String reference;
+    private String last_date;
+    private String area_text;
+    private String expected;
+    private String location;
+    private String camera;
+    private String browse;
 
 
     public String getLocation() {

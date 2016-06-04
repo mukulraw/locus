@@ -7,7 +7,6 @@
 
 
     <RelativeLayout
-        android:id="@+id/header"
         android:layout_width="match_parent"
         android:layout_height="?android:actionBarSize"
         android:layout_gravity="center_horizontal"

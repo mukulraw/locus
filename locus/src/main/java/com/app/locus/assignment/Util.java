@@ -4,8 +4,8 @@ import android.content.Context;
 
 
 
-public class Util {
-	Context context;
+class Util {
+	private final Context context;
 	public Util(Context context){
 		this.context = context;
 	}

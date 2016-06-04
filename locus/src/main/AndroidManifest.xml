@@ -32,7 +32,8 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme"
-        tools:replace="android:label">
+        tools:replace="android:label"
+        tools:ignore="AllowBackup,GoogleAppIndexingWarning">
         <activity
             android:name=".Flipper"
             android:exported="true"
@@ -94,7 +95,7 @@
         </activity>
         <activity android:name=".Assignment"
             android:windowSoftInputMode="stateHidden"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>
