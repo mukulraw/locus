@@ -207,10 +207,10 @@ public class Register extends Activity implements View.OnClickListener{
 
                 String a = "You are register successfully";
                 //noinspection StatementWithEmptyBody
-                if (result.equals(a));
-                {
-                    Toast.makeText(getApplicationContext(),"You have registered successfully", Toast.LENGTH_LONG).show();
-                }
+                //if (result.equals(a));
+                //{
+                    Toast.makeText(getApplicationContext(),result, Toast.LENGTH_LONG).show();
+                //}
 
 
 

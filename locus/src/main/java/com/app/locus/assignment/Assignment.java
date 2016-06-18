@@ -11,6 +11,7 @@ import java.util.List;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.ContentUris;
 import android.content.Context;
@@ -40,15 +41,19 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 
 @SuppressWarnings("ALL")
@@ -58,7 +63,7 @@ public class Assignment extends Activity implements View.OnClickListener, Locati
     private EditText _name;
     private EditText _email;
     private EditText _phone;
-    private EditText _last_date;
+    private Button _last_date;
     private EditText _text_area;
     private EditText _expected;
     private Spinner _country;
@@ -66,8 +71,8 @@ public class Assignment extends Activity implements View.OnClickListener, Locati
     private Spinner _grade;
     private Spinner _reference;
     private ImageButton camera;
-    private ImageView browse_image;
-    private ImageView camera_image;
+    private TextView browse_image;
+    private TextView camera_image;
     private Button submit;
     private Button browser;
     private String mCurrentPhotoPath;
@@ -172,14 +177,14 @@ public class Assignment extends Activity implements View.OnClickListener, Locati
         _grade = (Spinner) findViewById(R.id.spingrade);
         _reference = (Spinner) findViewById(R.id.spinreference);
 
-        _last_date = (EditText) findViewById(R.id.last_date_id);
+        _last_date = (Button) findViewById(R.id.last_date_id);
         _text_area = (EditText) findViewById(R.id.text_area_id);
 
-        browse_image = (ImageView) findViewById(R.id.browse_image_id);
+        browse_image = (TextView) findViewById(R.id.browse_image_id);
 
         browser = (Button) findViewById(R.id.browseid);
 
-        camera_image = (ImageView) findViewById(R.id.cameraviewid);
+        camera_image = (TextView) findViewById(R.id.cameraviewid);
 
         camera = (ImageButton) findViewById(R.id.camerabuttonid);
 
@@ -187,11 +192,16 @@ public class Assignment extends Activity implements View.OnClickListener, Locati
 
         bar = (ProgressBar)findViewById(R.id.progress_upload);
 
+
+
         submit = (Button) findViewById(R.id.submitid);
 
         submit.setOnClickListener(this);
         browser.setOnClickListener(this);
         camera.setOnClickListener(this);
+
+        _last_date.setOnClickListener(this);
+
 
 
         LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
@@ -290,17 +300,37 @@ public class Assignment extends Activity implements View.OnClickListener, Locati
             Intent intent = new Intent();
 
             intent.setAction(Intent.ACTION_GET_CONTENT);
-            intent.setType("image/*");
-            startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST);
+            intent.setType("file/*");
+            startActivityForResult(Intent.createChooser(intent, "Select File"), PICK_IMAGE_REQUEST);
 
         }
 
 
+
+        if (v == _last_date)
+        {
+
+            final Dialog dialog = new Dialog(this);
+            dialog.setContentView(R.layout.date_dialog);
+            final DatePicker datePicker = (DatePicker)dialog.findViewById(R.id.pick_date);
+            dialog.setCancelable(false);
+            dialog.show();
+
+            Button ok = (Button)dialog.findViewById(R.id.select);
+
+            ok.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    bean.setLast_date(String.valueOf(datePicker.getDayOfMonth() + "/" + String.valueOf(datePicker.getMonth() + 1) + "/" + datePicker.getYear()));
+                    dialog.dismiss();
+                }
+            });
+
+
+
+        }
+
         if (v == camera) {
-
-
-
-
             Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
             // Ensure that there's a camera activity to handle the intent
             if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
@@ -319,12 +349,6 @@ public class Assignment extends Activity implements View.OnClickListener, Locati
                     startActivityForResult(takePictureIntent, CAPTURE_IMAGE_REQUEST);
                 }
             }
-
-
-
-
-
-
         }
 
 
@@ -350,47 +374,38 @@ public class Assignment extends Activity implements View.OnClickListener, Locati
                     return;
                 }
 
-                if (_phone.getText().length()>0)
+
+                if (isValidMobile(_phone.getText().toString()))
                 {
                     bean.setPhone(String.valueOf(_phone.getText()));
                 }
                 else
                 {
-                    Toast.makeText(getBaseContext() , "Please enter your Phone Number" , Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                if (_last_date.getText().length()>0)
-                {
-                    bean.setLast_date(String.valueOf(_last_date.getText()));
-                }
-                else
-                {
-                    Toast.makeText(getBaseContext() , "Please enter last date" , Toast.LENGTH_SHORT).show();
-                    return;
+                    Toast.makeText(this , "Invalid Phone Number" , Toast.LENGTH_SHORT).show();
                 }
 
-                if (_text_area.getText().length()>0)
-                {
+
+
+
+
+                    //bean.setLast_date(String.valueOf(_last_date.getDayOfMonth() + "/" + _last_date.getMonth() + "/" + _last_date.getYear()));
+
+
+
+
                     bean.setArea_text(String.valueOf(_text_area.getText()));
-                }
-                else
-                {
-                    Toast.makeText(getBaseContext() , "Please enter description" , Toast.LENGTH_SHORT).show();
-                    return;
-                }
 
-                if (_expected.getText().length()>0)
-                {
+
+
                     bean.setExpected(String.valueOf(_expected.getText()));
-                    bean.setLocation(String.valueOf(current.getLatitude()) + String.valueOf(current.getLongitude()));
 
 
-                    Log.d("asdasdasd", String.valueOf(current.getLatitude()) + String.valueOf(current.getLongitude()));
 
 
-                    if (path == null || mCurrentPhotoPath ==null)
+
+                    if (path == null || mCurrentPhotoPath == null)
                     {
-                        Toast.makeText(getApplicationContext()  , "Please select a image" , Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext()  , "Please select an image" , Toast.LENGTH_SHORT).show();
                         return;
                     }
                     else
@@ -399,12 +414,7 @@ public class Assignment extends Activity implements View.OnClickListener, Locati
                     }
 
 
-                }
-                else
-                {
-                    Toast.makeText(getBaseContext() , "Please enter expected amount" , Toast.LENGTH_SHORT).show();
-                    return;
-                }
+
 
 
 
@@ -420,7 +430,7 @@ public class Assignment extends Activity implements View.OnClickListener, Locati
         @SuppressLint("SimpleDateFormat") String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
         String imageFileName = "JPEG_" + timeStamp + "_";
         File storageDir = Environment.getExternalStoragePublicDirectory(
-                Environment.DIRECTORY_PICTURES);
+                Environment.DIRECTORY_DCIM);
         File image = File.createTempFile(
                 imageFileName,  /* prefix */
                 ".jpg",         /* suffix */
@@ -430,9 +440,13 @@ public class Assignment extends Activity implements View.OnClickListener, Locati
         // Save a file: path for use with ACTION_VIEW intents
         mCurrentPhotoPath =  image.getAbsolutePath();
         Log.d("asdasdasdasdasdad" , mCurrentPhotoPath);
+        camera_image.setText(mCurrentPhotoPath);
         return image;
     }
-
+    private boolean isValidMobile(String phone)
+    {
+        return android.util.Patterns.PHONE.matcher(phone).matches();
+    }
 
 
     @Override
@@ -444,7 +458,7 @@ public class Assignment extends Activity implements View.OnClickListener, Locati
             try {
                 bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), Uri.parse(String.valueOf(data.getData())));
                 browse_image.setVisibility(View.VISIBLE);
-                browse_image.setImageBitmap(bitmap);
+                //browse_image.setImageBitmap(bitmap);
                 Uri selectedImageUri = data.getData();
 
                 //bean.setBrowse(bitmap);
@@ -452,6 +466,8 @@ public class Assignment extends Activity implements View.OnClickListener, Locati
 
 
                 path = getPath(getApplicationContext() , selectedImageUri);
+
+                browse_image.setText(path);
 
                 //path = selectedImageUri.getPath();
 
@@ -478,17 +494,17 @@ public class Assignment extends Activity implements View.OnClickListener, Locati
 
         if (requestCode == CAPTURE_IMAGE_REQUEST && resultCode == RESULT_OK) {
 
-            if (data != null) {
 
 
 
-                Log.d("asdasdasd" , mCurrentPhotoPath);
 
 
-                Bundle extras = data.getExtras();
-                Bitmap imageBitmap = (Bitmap) extras.get("data");
 
-                camera_image.setImageBitmap(imageBitmap);
+
+
+
+
+                //camera_image.setImageBitmap(imageBitmap);
 
 
 
@@ -528,7 +544,7 @@ public class Assignment extends Activity implements View.OnClickListener, Locati
                 //    ph.mkdir();
                 //    sendBroadcast(new Intent(Intent.ACTION_MEDIA_MOUNTED, Uri.parse("file://"+Environment.getExternalStorageDirectory())));
                // }
-                }
+
         }
     }
 
@@ -787,7 +803,7 @@ public class Assignment extends Activity implements View.OnClickListener, Locati
         bmOptions.inPurgeable = true;
 
         Bitmap bitmap = BitmapFactory.decodeFile(mCurrentPhotoPath, bmOptions);
-        camera_image.setImageBitmap(bitmap);
+        //camera_image.setImageBitmap(bitmap);
     }
 
 
@@ -946,6 +962,7 @@ public class Assignment extends Activity implements View.OnClickListener, Locati
         protected void onPreExecute() {
             super.onPreExecute();
 
+            submit.setVisibility(View.INVISIBLE);
             bar.setVisibility(View.VISIBLE);
 
         }
@@ -955,65 +972,51 @@ public class Assignment extends Activity implements View.OnClickListener, Locati
             RegisterUserClass ruc = new RegisterUserClass();
             Geocoder g = new Geocoder(getApplicationContext());
             try {
-                List<Address> addresses = g.getFromLocation(current.getLatitude() , current.getLongitude() , 5);
+                List<Address> addresses = g.getFromLocation(current.getLatitude() , current.getLongitude() , 1);
                 Address address = addresses.get(0);
-                strAddress = "Name: " + address + "\n" +
+                StringBuilder strAddres = new StringBuilder();
+
+                for(int i=0; i<address.getMaxAddressLineIndex(); i++) {
+                    strAddres.append(address.getAddressLine(i)).append("\n");
+                }
+
+
+                strAddress = strAddres.toString();
+                Log.d("asdasdasd" , strAddress);
+
+/*
+                try {
+                    JSONArray array = new JSONArray(String.valueOf(address));
+                    Log.d("asdasdasd" , String.valueOf(array));
+                    JSONArray arr = array.getJSONArray(0);
+                    Log.d("asdasdasd" , String.valueOf(arr));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+*/
+
+                /*strAddress = "Name: " + address + "\n" +
                         "Sub-Admin Areas: " + address.getSubAdminArea() + "\n" +
                         "Admin Area: " + address.getAdminArea() + "\n" +
                         "Country: " + address.getCountryName() + "\n" +
                         "Country Code: " + address.getCountryCode() + "\n";
+                */
+
+
+
             } catch (IOException e) {
+                e.printStackTrace();
+            }catch (NullPointerException e)
+            {
                 e.printStackTrace();
             }
 
-/*
-            List<NameValuePair> data = new ArrayList<>();
-            data.add(new BasicNameValuePair("name" , name));
-            data.add(new BasicNameValuePair("email" , email));
-            data.add(new BasicNameValuePair("phone" , phone));
-            data.add(new BasicNameValuePair("country" , country));
-            data.add(new BasicNameValuePair("subject" , subject));
-            data.add(new BasicNameValuePair("pagrade" , grade));
-            data.add(new BasicNameValuePair("refrence" , reference));
-            data.add(new BasicNameValuePair("lastdateofsubmission" , last_date));
-            data.add(new BasicNameValuePair("textarea" , area_text));
-            data.add(new BasicNameValuePair("paexpect" , expected));
-            data.add(new BasicNameValuePair("location" , strAddress));
-            data.add(new BasicNameValuePair("browse" , browse));
-            data.add(new BasicNameValuePair("camera" , camera));
-
-            result = ruc.sendPostRequest(POST_URL , data);
-
-
-*/
 
 
 
 
 
-     /*       HashMap<String , String> info = new HashMap<>();
 
-            info.put("name" , name);
-            info.put("email" , email);
-            info.put("phone" , phone);
-            info.put("country" , country);
-            info.put("subject" , subject);
-            info.put("pagrade" , grade);
-            info.put("refrence" , reference);
-            info.put("lastdateofsubmission" , last_date);
-            info.put("textarea" , area_text);
-            info.put("paexpect" , expected);
-            info.put("location" , strAddress);
-            info.put("browse" , bo);
-            info.put("camera" , cm);
-
-
-            RequestHandler handler = new RequestHandler();
-            result = handler.sendPostRequest(POST_URL , info);
-*/
-
-
-            //File f = new File(getRealPathFromURI(uri));
 
 
             String requestURL = "http://www.kickassassignmenthelp.com/wp-content/themes/assignment/assignment-save.php";
@@ -1054,7 +1057,7 @@ public class Assignment extends Activity implements View.OnClickListener, Locati
                     System.out.println(line);
                     result = line;
                 }
-                Log.d("asdasdasd" , result);
+                //Log.d("asdasdasd" , result);
 
 
             } catch (IOException ex) {
@@ -1086,21 +1089,22 @@ public class Assignment extends Activity implements View.OnClickListener, Locati
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
-            Log.d("asdasdasd" , result);
-            Log.d("asdasdasd" , strAddress);
-            Toast.makeText(getBaseContext() , result , Toast.LENGTH_SHORT).show();
+            //Log.d("asdasdasd" , result);
+           // Log.d("asdasdasd" , strAddress);
 
-            if(result.equals("Your requirment submit successfully"))
+
+            if(result.equals("Successfully submitted{\"message\":\"Your requirment submit successfully\"}"))
             {
+                Toast.makeText(getBaseContext() , "Successfully submitted" , Toast.LENGTH_SHORT).show();
                 bar.setVisibility(View.INVISIBLE);
                 _name.setText("");
                 _email.setText("");
                 _phone.setText("");
-                _last_date.setText("");
                 _text_area.setText("");
                 _expected.setText("");
-                browse_image.setImageBitmap(null);
-                camera_image.setImageBitmap(null);
+                browse_image.setText("");
+                camera_image.setText("");
+                submit.setVisibility(View.VISIBLE);
 
             }
 

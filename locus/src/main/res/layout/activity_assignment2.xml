@@ -70,8 +70,15 @@
                 android:inputType="phone"
                 android:layout_marginBottom="10dp"
                 android:minEms="10"
+                android:maxEms="10"
                 android:hint="@string/your_phone"
                 android:id="@+id/phoneid"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Select your country"
                 />
 
             <Spinner
@@ -87,7 +94,11 @@
                 android:id="@+id/spincountry"
                 android:layout_marginBottom="10dp"
                 />
-
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Select your subject"
+                />
             <Spinner
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -101,6 +112,12 @@
                 android:id="@+id/spinsubject"
                 android:layout_marginBottom="10dp"
                 />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Select your grade"
+                />
+
             <Spinner
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -113,6 +130,11 @@
                 android:padding="5dip"
                 android:id="@+id/spingrade"
                 android:layout_marginBottom="10dp"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Select your reference"
                 />
             <Spinner
                 android:layout_width="match_parent"
@@ -128,29 +150,32 @@
                 android:layout_marginBottom="10dp"
                 />
 
-            <EditText
+
+
+            <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/last_date_of_submission"
+                android:text="@string/deadline_date_for_submission"
                 android:layout_marginBottom="10dp"
-                android:inputType="date"
                 android:id="@+id/last_date_id"
                 />
+
+
 
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
+                android:hint="@string/description"
                 android:layout_marginBottom="10dp"
                 android:id="@+id/text_area_id"
                 tools:ignore="TextFields" />
 
 
-            <ImageView
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:id="@+id/browse_image_id"
-                android:scaleType="fitCenter"
                 android:layout_marginBottom="10dp"
                 tools:ignore="ContentDescription" />
 
@@ -162,9 +187,8 @@
                 android:layout_marginBottom="10dp"
                 android:id="@+id/browseid"
                 />
-            <ImageView
+            <TextView
                 android:layout_width="wrap_content"
-                android:scaleType="fitCenter"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
                 android:layout_gravity="center_horizontal"

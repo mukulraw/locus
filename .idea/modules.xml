@@ -3,7 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Locus.iml" filepath="$PROJECT_DIR$/Locus.iml" />
-      <module fileurl="file://$PROJECT_DIR$/locus/locus-locus.iml" filepath="$PROJECT_DIR$/locus/locus-locus.iml" />
+      <module fileurl="file://$PROJECT_DIR$/locus/locus.iml" filepath="$PROJECT_DIR$/locus/locus.iml" />
     </modules>
   </component>
 </project>
