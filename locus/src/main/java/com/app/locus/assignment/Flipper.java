@@ -3,9 +3,11 @@ package com.app.locus.assignment;
 import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.LocationManager;
 import android.os.Build;
@@ -14,6 +16,7 @@ import android.os.Environment;
 import android.support.v4.app.ActivityCompat;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import java.io.File;
@@ -26,13 +29,19 @@ public class Flipper extends Activity{
 
 
 
-    String[] PERMISSIONS = { Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA  , Manifest.permission.READ_LOGS , Manifest.permission.ACCESS_COARSE_LOCATION};
+    String[] PERMISSIONS = { Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA  , Manifest.permission.READ_LOGS };
     final private int REQUEST_CODE_ASK_PERMISSIONS = 123;
+    private SharedPreferences pref;
+    private SharedPreferences.Editor edit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.view_flipper);
+
+        pref = getSharedPreferences("Locus", Context.MODE_PRIVATE);
+        edit = pref.edit();
+
         File filename = new File(Environment.getExternalStorageDirectory()+"/mylog.log");
         try {
             filename.createNewFile();
@@ -51,27 +60,71 @@ public class Flipper extends Activity{
         }
 
 
-        LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
-
-        if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)){
+        boolean is = pref.getBoolean("is" , false);
 
 
+        if (!is)
+        {
+            final Dialog dialog = new Dialog(this);
+            dialog.setContentView(R.layout.dilaog);
+            dialog.setCancelable(false);
+            dialog.show();
 
-            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
-                int hasLocationPermission = checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION);
-                if(hasLocationPermission!=PackageManager.PERMISSION_GRANTED)
-                {
-                    //request permission
-                    requestPermissions(new String[]{Manifest.permission.ACCESS_COARSE_LOCATION} , REQUEST_CODE_ASK_PERMISSIONS);
+            Button yes = (Button)dialog.findViewById(R.id.yes);
+            Button no = (Button)dialog.findViewById(R.id.no);
+
+
+            yes.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+
+                    if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)){
+
+                        edit.putBoolean("is" , true);
+                        edit.apply();
+                        dialog.dismiss();
+
+                        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
+                            int hasLocationPermission = checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION);
+                            if(hasLocationPermission!=PackageManager.PERMISSION_GRANTED)
+                            {
+                                //request permission
+                                requestPermissions(new String[]{Manifest.permission.ACCESS_COARSE_LOCATION} , 111);
+                            }
+
+                        }
+
+
+
+                    }else{
+                        edit.putBoolean("is" , true);
+                        edit.apply();
+                        dialog.dismiss();
+                        showGPSDisabledAlertToUser();
+                    }
+
+
                 }
+            });
 
-            }
-
-
-
-        }else{
-            showGPSDisabledAlertToUser();
+            no.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    edit.putBoolean("is" , true);
+                    edit.apply();
+                    dialog.dismiss();
+                }
+            });
         }
+
+
+
+
+
+
+
+
 
 
 
@@ -149,14 +202,14 @@ public class Flipper extends Activity{
                 perms.put(Manifest.permission.CAMERA, PackageManager.PERMISSION_GRANTED);
 
                 perms.put(Manifest.permission.WRITE_EXTERNAL_STORAGE , PackageManager.PERMISSION_GRANTED);
-                perms.put(Manifest.permission.ACCESS_COARSE_LOCATION, PackageManager.PERMISSION_GRANTED);
+                //perms.put(Manifest.permission.ACCESS_COARSE_LOCATION, PackageManager.PERMISSION_GRANTED);
                 // Fill with actual results from user
                 if (grantResults.length > 0) {
                     for (int i = 0; i < permissions.length; i++)
                         perms.put(permissions[i], grantResults[i]);
                     // Check for both permissions
                     if (perms.get(Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED
-                             && perms.get(Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED && perms.get(Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED ) {
+                             && perms.get(Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED   ) {
                         Log.d("asdasdasd", "sms & location services permission granted");
                         // process the normal flow
                         //else any one or both the permissions are not granted
@@ -165,7 +218,7 @@ public class Flipper extends Activity{
                         //permission is denied (this is the first time, when "never ask again" is not checked) so ask again explaining the usage of permission
 //                        // shouldShowRequestPermissionRationale will return true
                         //show the dialog or snackbar saying its necessary and try again otherwise proceed with setup.
-                        if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.CAMERA)  || ActivityCompat.shouldShowRequestPermissionRationale(this , Manifest.permission.WRITE_EXTERNAL_STORAGE) ||  ActivityCompat.shouldShowRequestPermissionRationale(this , Manifest.permission.ACCESS_COARSE_LOCATION)) {
+                        if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.CAMERA)  || ActivityCompat.shouldShowRequestPermissionRationale(this , Manifest.permission.WRITE_EXTERNAL_STORAGE) ) {
 
                             Toast.makeText(getApplicationContext() , "Permissions are required for this app" , Toast.LENGTH_SHORT).show();
                             finish();
@@ -181,6 +234,21 @@ public class Flipper extends Activity{
                         }
                     }
                 }
+                break;
+            }
+
+            case 111:
+            {
+
+
+
+                if(!hasPermissions(this, PERMISSIONS)){
+                    ActivityCompat.requestPermissions(this, PERMISSIONS, REQUEST_CODE_ASK_PERMISSIONS);
+                }
+
+
+
+
             }
         }
 

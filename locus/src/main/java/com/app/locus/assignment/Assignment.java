@@ -9,6 +9,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Dialog;
@@ -204,18 +205,24 @@ public class Assignment extends Activity implements View.OnClickListener, Locati
 
 
 
-        LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
-            return;
+        int hasLocationPermission = checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION);
+        if(hasLocationPermission == PackageManager.PERMISSION_GRANTED)
+        {
+            LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+            if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                // TODO: Consider calling
+                //    ActivityCompat#requestPermissions
+                // here to request the missing permissions, and then overriding
+                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                //                                          int[] grantResults)
+                // to handle the case where the user grants the permission. See the documentation
+                // for ActivityCompat#requestPermissions for more details.
+                return;
+            }
+            locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, this);
         }
-        locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, this);
+
+
 
 
         _country.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -504,46 +511,7 @@ public class Assignment extends Activity implements View.OnClickListener, Locati
 
 
 
-                //camera_image.setImageBitmap(imageBitmap);
 
-
-
-
-
-
-                //Uri selectedImageUri = data.getData();
-                //String p = getRealPathFromURI(selectedImageUri);
-
-                //Log.d("asasdsad" , String.valueOf(selectedImageUri));
-
-              //  bean.setCamera(new File(getRealPathFromURI(tempUri)));
-
-
-                /*Bitmap cam = (Bitmap) data.getExtras().get("data");
-
-                String cams = getStringImage(cam);
-
-                bean.setCamera(cams);
-
-                cm = cams;
-                Log.d("asdasdasd" , cams);
-
-                camera_image.setVisibility(View.VISIBLE);
-                camera_image.setImageBitmap((Bitmap) data.getExtras().get("data"));
-
-                */
-
-
-               // uri = data.getData();
-               // if (uri == null && CapturedImageURL != null)
-               // {
-               //     uri = Uri.fromFile(new File(CapturedImageURL));
-               // }
-                //ph = new File(CapturedImageURL);
-                //if (!ph.exists()) {
-                //    ph.mkdir();
-                //    sendBroadcast(new Intent(Intent.ACTION_MEDIA_MOUNTED, Uri.parse("file://"+Environment.getExternalStorageDirectory())));
-               // }
 
         }
     }
@@ -659,13 +627,7 @@ public class Assignment extends Activity implements View.OnClickListener, Locati
 
             try {
 
-                /**  Uri.withAppendedPath Method Description
-                 * Parameters
-                 *    baseUri  Uri to append path segment to
-                 *    pathSegment  encoded path segment to append
-                 * Returns
-                 *    a new Uri based on baseUri with the given segment appended to the path
-                 */
+
 
                 uri = Uri.withAppendedPath(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "" + urls[0]);
 
@@ -903,7 +865,11 @@ public class Assignment extends Activity implements View.OnClickListener, Locati
 
     @Override
     public void onLocationChanged(Location location) {
-        this.current = location;
+        if (location!=null)
+        {
+            this.current = location;
+        }
+
     }
 
     @Override
@@ -970,46 +936,38 @@ public class Assignment extends Activity implements View.OnClickListener, Locati
         @Override
         protected Void doInBackground(Void... params) {
             RegisterUserClass ruc = new RegisterUserClass();
-            Geocoder g = new Geocoder(getApplicationContext());
-            try {
-                List<Address> addresses = g.getFromLocation(current.getLatitude() , current.getLongitude() , 1);
-                Address address = addresses.get(0);
-                StringBuilder strAddres = new StringBuilder();
-
-                for(int i=0; i<address.getMaxAddressLineIndex(); i++) {
-                    strAddres.append(address.getAddressLine(i)).append("\n");
-                }
 
 
-                strAddress = strAddres.toString();
-                Log.d("asdasdasd" , strAddress);
-
-/*
+            if (current!=null)
+            {
+                Geocoder g = new Geocoder(getApplicationContext());
                 try {
-                    JSONArray array = new JSONArray(String.valueOf(address));
-                    Log.d("asdasdasd" , String.valueOf(array));
-                    JSONArray arr = array.getJSONArray(0);
-                    Log.d("asdasdasd" , String.valueOf(arr));
-                } catch (JSONException e) {
+                    List<Address> addresses = g.getFromLocation(current.getLatitude() , current.getLongitude() , 1);
+                    Address address = addresses.get(0);
+                    StringBuilder strAddres = new StringBuilder();
+
+                    for(int i=0; i<address.getMaxAddressLineIndex(); i++) {
+                        strAddres.append(address.getAddressLine(i)).append("\n");
+                    }
+
+
+                    strAddress = strAddres.toString();
+                    Log.d("asdasdasd" , strAddress);
+
+
+
+
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }catch (NullPointerException e)
+                {
                     e.printStackTrace();
                 }
-*/
-
-                /*strAddress = "Name: " + address + "\n" +
-                        "Sub-Admin Areas: " + address.getSubAdminArea() + "\n" +
-                        "Admin Area: " + address.getAdminArea() + "\n" +
-                        "Country: " + address.getCountryName() + "\n" +
-                        "Country Code: " + address.getCountryCode() + "\n";
-                */
-
-
-
-            } catch (IOException e) {
-                e.printStackTrace();
-            }catch (NullPointerException e)
-            {
-                e.printStackTrace();
             }
+
+
+
 
 
 
@@ -1042,7 +1000,15 @@ public class Assignment extends Activity implements View.OnClickListener, Locati
                 multipart.addFormField("lastdateofsubmission", last_date);
                 multipart.addFormField("textarea", area_text);
                 multipart.addFormField("paexpect", expected);
-                multipart.addFormField("location", strAddress);
+                if (strAddress!=null)
+                {
+                    multipart.addFormField("location", strAddress);
+                }
+                else
+                {
+                    multipart.addFormField("location" , "null");
+                }
+
                 multipart.addFilePart("browse", f);
                 multipart.addFilePart("camera", f2);
 
