@@ -10,5 +10,6 @@ class AccountKey {
     /**
      * Replace this key with your Zopim account key
      */
-    public static final String ACCOUNT_KEY="3p42l8K4GKWGz7C44xO6NcDkVzSC4iMf";
+   // public static final String ACCOUNT_KEY="3p42l8K4GKWGz7C44xO6NcDkVzSC4iMf";
+    public static final String ACCOUNT_KEY="1do1DwHExyRlHxx4aHvZeAc6Ohq0G49g";
 }

@@ -27,7 +27,7 @@ public class Firstpage extends Activity {
 
 	      String username = intent.getStringExtra(SplashActivity.USER_NAME);
 
-        ZopimChat.init("3wdG5NtNSf8DXdcH5bGhXe2LWQH6U6WL").build();
+        ZopimChat.init(AccountKey.ACCOUNT_KEY).build();
 		TextView textview=(TextView) findViewById(R.id.textView1);
 		
 		textview.setText(username);
