@@ -179,8 +179,8 @@ public class Register extends Activity implements View.OnClickListener{
 
                 List<NameValuePair> data = new ArrayList<>();
                 data.add(new BasicNameValuePair("name" , params[0]));
-                data.add(new BasicNameValuePair("email" , params[1]));
-                data.add(new BasicNameValuePair("mobile" , params[2]));
+                data.add(new BasicNameValuePair("mobile" , params[1]));
+                data.add(new BasicNameValuePair("email" , params[2]));
                 data.add(new BasicNameValuePair("password" , params[3]));
 
                 result = ruc.sendPostRequest(REGISTER_URL , data);

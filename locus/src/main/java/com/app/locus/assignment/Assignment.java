@@ -51,6 +51,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.apache.commons.lang3.event.EventListenerSupport;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -71,7 +72,7 @@ public class Assignment extends Activity implements View.OnClickListener, Locati
     private Spinner _subject;
     private Spinner _grade;
     private Spinner _reference;
-    private ImageButton camera;
+    private Button camera;
     private TextView browse_image;
     private TextView camera_image;
     private Button submit;
@@ -84,7 +85,7 @@ public class Assignment extends Activity implements View.OnClickListener, Locati
 
     ProgressBar bar;
 
-    private final String[] listSpinner1 = {"Afghanistan", "Akrotiri", "Albania", "Algeria",
+    private final String[] listSpinner1 = {"--Select country--","Afghanistan", "Akrotiri", "Albania", "Algeria",
             "American Samoa", "Andorra", "Angola", "Anguilla", "Antarctica", "Antigua and Barbuda", "Argentina", "Armenia",
             "Aruba", "Ashmore and Cartier Islands", "Australia", "Austria", "Azerbaijan", "Bahamas Bahrain", "Bangladesh",
             "Barbados", "Bassas da India", "Belarus", "Belgium", "Belize", "Benin", "Bermuda", "Bhutan", "Bolivia", "Bosnia and Herzegovina",
@@ -116,7 +117,7 @@ public class Assignment extends Activity implements View.OnClickListener, Locati
             "Zimbabwe"};
 
 
-    private final String[] listSpinner2 = {"Accounts", "Animation", "Archaeology", "Architecture", "Article Biology",
+    private final String[] listSpinner2 = {"--Select subject--","Accounts", "Animation", "Archaeology", "Architecture", "Article Biology",
             "Biotechnology", "Business Communication", "Business Ethics", "Business Laws", "Case Study", "Chemical engineering", "Chemistry Civil engineering",
             "Computer Programming", "Computer science", "Computer-aided design", "Corporate Governance", "Database Dissertation",
             "E-Commerce", "Economics Electrical engineering", "Engineering", "English", "ERP", "Essay Writing", "Finance Geography Geology History",
@@ -125,10 +126,10 @@ public class Assignment extends Activity implements View.OnClickListener, Locati
             "Presentation", "Project Management", "Psychology", "Quantitative Techniques", "Research Methodology", "Science", "Security Analysis and Portfolio Management",
             "Sociology", "Statistics", "Term Paper Writing", "Thesis Writing", "Others"};
 
-    private final String[] listSpinner3 = {"School Level", "K-12 Level", "High School Level",
+    private final String[] listSpinner3 = {"--Select grade--","School Level", "K-12 Level", "High School Level",
             "College Level", "Post Graduate Level", "Engineering Level", "Research Level"};
 
-    private final String[] listSpinner4 = {"Harvard", "APA", "MLA", "Chicago", "Footnotes",
+    private final String[] listSpinner4 = {"--Select reference--","Harvard", "APA", "MLA", "Chicago", "Footnotes",
             "Footnotes and bibliography", "Vancouver", "Turabian"};
 
 
@@ -187,7 +188,7 @@ public class Assignment extends Activity implements View.OnClickListener, Locati
 
         camera_image = (TextView) findViewById(R.id.cameraviewid);
 
-        camera = (ImageButton) findViewById(R.id.camerabuttonid);
+        camera = (Button) findViewById(R.id.camerabuttonid);
 
         _expected = (EditText) findViewById(R.id.expectedid);
 
@@ -228,7 +229,15 @@ public class Assignment extends Activity implements View.OnClickListener, Locati
         _country.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                bean.setCountry(listSpinner1[position]);
+                if (position>0)
+                {
+                    bean.setCountry(listSpinner1[position]);
+                }
+                else
+                {
+                    bean.setCountry("---");
+                }
+
             }
 
             @Override
@@ -382,14 +391,18 @@ public class Assignment extends Activity implements View.OnClickListener, Locati
                 }
 
 
-                if (isValidMobile(_phone.getText().toString()))
+                if (_phone.getText().toString().length()>0)
                 {
-                    bean.setPhone(String.valueOf(_phone.getText()));
+                    if (isValidMobile(_phone.getText().toString()))
+                    {
+                        bean.setPhone(String.valueOf(_phone.getText()));
+                    }
+                    else
+                    {
+                        Toast.makeText(this , "Invalid Phone Number" , Toast.LENGTH_SHORT).show();
+                    }
                 }
-                else
-                {
-                    Toast.makeText(this , "Invalid Phone Number" , Toast.LENGTH_SHORT).show();
-                }
+
 
 
 
@@ -410,15 +423,8 @@ public class Assignment extends Activity implements View.OnClickListener, Locati
 
 
 
-                    if (path == null || mCurrentPhotoPath == null)
-                    {
-                        Toast.makeText(getApplicationContext()  , "Please select an image" , Toast.LENGTH_SHORT).show();
-                        return;
-                    }
-                    else
-                    {
+
                         new upload(bean).execute();
-                    }
 
 
 
@@ -979,10 +985,10 @@ public class Assignment extends Activity implements View.OnClickListener, Locati
 
             String requestURL = "http://www.kickassassignmenthelp.com/wp-content/themes/assignment/assignment-save.php";
 
-            File f = null;
-            f = new File(path);
-            File f2 = null;
-            f2 = new File(mCurrentPhotoPath);
+
+
+
+
             //File f2 = new File(mCurrentPhotoPath);
 
             try {
@@ -1009,8 +1015,27 @@ public class Assignment extends Activity implements View.OnClickListener, Locati
                     multipart.addFormField("location" , "null");
                 }
 
-                multipart.addFilePart("browse", f);
-                multipart.addFilePart("camera", f2);
+                if (path!=null)
+                {
+                    File f = null;
+                    f = new File(path);
+                    multipart.addFilePart("browse", f);
+                }
+                else
+                {
+                    multipart.addFormField("browse" , null);
+                }
+
+                if (mCurrentPhotoPath!=null)
+                {
+                    File f2 = null;
+                    f2 = new File(mCurrentPhotoPath);
+                    multipart.addFilePart("camera", f2);
+
+                }
+                else {
+                    multipart.addFormField("camera" , null);
+                }
 
 
                 // multipart.addFilePart("fileUpload", uploadFile2);
@@ -1059,7 +1084,7 @@ public class Assignment extends Activity implements View.OnClickListener, Locati
            // Log.d("asdasdasd" , strAddress);
 
 
-            if(result.equals("Successfully submitted{\"message\":\"Your requirment submit successfully\"}"))
+            if(result.equals("Your requirment submit successfully") )
             {
                 Toast.makeText(getBaseContext() , "Successfully submitted" , Toast.LENGTH_SHORT).show();
                 bar.setVisibility(View.INVISIBLE);
@@ -1071,6 +1096,8 @@ public class Assignment extends Activity implements View.OnClickListener, Locati
                 browse_image.setText("");
                 camera_image.setText("");
                 submit.setVisibility(View.VISIBLE);
+                path = null;
+                mCurrentPhotoPath = null;
 
             }
 

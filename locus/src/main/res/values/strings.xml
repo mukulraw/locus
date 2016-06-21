@@ -60,19 +60,20 @@
     <string name="submit_your_requirements">Submit your requirements</string>
     <string name="your_name">Your name*</string>
     <string name="your_email">Your Email*</string>
-    <string name="your_phone">Your phone*</string>
+    <string name="your_phone">Your phone</string>
     <string name="select_country">--Select Country--</string>
     <string name="select_subject">--Select Subject--</string>
     <string name="select_grade">--Select Grade--</string>
     <string name="select_reference">--Select Reference--</string>
     <string name="last_date_of_submission">Last date of submission*</string>
-    <string name="browse">Browse</string>
+    <string name="browse">Browse file</string>
     <string name="submit1">SUBMIT</string>
     <string name="expected_quote_in_usd">Expected Quote in USD</string>
     <string name="enter_your_email_id">Enter Your Email ID</string>
     <string name="description">Description</string>
     <string name="select_date">SELECT DATE</string>
     <string name="deadline_date_for_submission">deadline date for submission</string>
+    <string name="capture_image">Capture Image</string>
 
 
 </resources>
