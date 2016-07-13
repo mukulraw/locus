@@ -29,7 +29,7 @@ public class Flipper extends Activity{
 
 
 
-    String[] PERMISSIONS = { Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA  , Manifest.permission.READ_LOGS };
+    String[] PERMISSIONS = { Manifest.permission.WRITE_EXTERNAL_STORAGE  , Manifest.permission.READ_LOGS };
     final private int REQUEST_CODE_ASK_PERMISSIONS = 123;
     private SharedPreferences pref;
     private SharedPreferences.Editor edit;
@@ -199,7 +199,7 @@ public class Flipper extends Activity{
 
                 Map<String, Integer> perms = new HashMap<>();
                 // Initialize the map with both permissions
-                perms.put(Manifest.permission.CAMERA, PackageManager.PERMISSION_GRANTED);
+                //perms.put(Manifest.permission.CAMERA, PackageManager.PERMISSION_GRANTED);
 
                 perms.put(Manifest.permission.WRITE_EXTERNAL_STORAGE , PackageManager.PERMISSION_GRANTED);
                 //perms.put(Manifest.permission.ACCESS_COARSE_LOCATION, PackageManager.PERMISSION_GRANTED);
@@ -208,8 +208,7 @@ public class Flipper extends Activity{
                     for (int i = 0; i < permissions.length; i++)
                         perms.put(permissions[i], grantResults[i]);
                     // Check for both permissions
-                    if (perms.get(Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED
-                             && perms.get(Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED   ) {
+                    if (perms.get(Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED   ) {
                         Log.d("asdasdasd", "sms & location services permission granted");
                         // process the normal flow
                         //else any one or both the permissions are not granted
@@ -218,7 +217,7 @@ public class Flipper extends Activity{
                         //permission is denied (this is the first time, when "never ask again" is not checked) so ask again explaining the usage of permission
 //                        // shouldShowRequestPermissionRationale will return true
                         //show the dialog or snackbar saying its necessary and try again otherwise proceed with setup.
-                        if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.CAMERA)  || ActivityCompat.shouldShowRequestPermissionRationale(this , Manifest.permission.WRITE_EXTERNAL_STORAGE) ) {
+                        if (ActivityCompat.shouldShowRequestPermissionRationale(this , Manifest.permission.WRITE_EXTERNAL_STORAGE) ) {
 
                             Toast.makeText(getApplicationContext() , "Permissions are required for this app" , Toast.LENGTH_SHORT).show();
                             finish();
@@ -242,8 +241,8 @@ public class Flipper extends Activity{
 
 
 
-                if(!hasPermissions(this, PERMISSIONS)){
-                    ActivityCompat.requestPermissions(this, PERMISSIONS, REQUEST_CODE_ASK_PERMISSIONS);
+                if(!hasPermissions(this, Manifest.permission.ACCESS_COARSE_LOCATION)){
+                    ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, REQUEST_CODE_ASK_PERMISSIONS);
                 }
 
 
@@ -280,7 +279,7 @@ public class Flipper extends Activity{
 
     }
 
-    public static boolean hasPermissions(Context context, String... permissions) {
+    private static boolean hasPermissions(Context context, String... permissions) {
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && context != null && permissions != null) {
             for (String permission : permissions) {
                 if (ActivityCompat.checkSelfPermission(context, permission) != PackageManager.PERMISSION_GRANTED) {

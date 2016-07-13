@@ -199,8 +199,47 @@ public class Assignment extends Activity implements View.OnClickListener, Locati
         submit = (Button) findViewById(R.id.submitid);
 
         submit.setOnClickListener(this);
-        browser.setOnClickListener(this);
-        camera.setOnClickListener(this);
+        browser.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent();
+
+                intent.setAction(Intent.ACTION_GET_CONTENT);
+                intent.setType("*/*");
+                startActivityForResult(Intent.createChooser(intent, "Select File"), PICK_IMAGE_REQUEST);
+
+            }
+        });
+        camera.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
+                    int hasLocationPermission = checkSelfPermission(Manifest.permission.CAMERA);
+                    if(hasLocationPermission!=PackageManager.PERMISSION_GRANTED)
+                    {
+                        requestPermissions(new String[]{Manifest.permission.CAMERA} , 111);
+                    }
+                    else
+                    {
+                        CaptureImage();
+                    }
+
+                }
+                else {
+                    CaptureImage();
+                }
+
+
+
+
+
+
+
+            }
+        });
 
         _last_date.setOnClickListener(this);
 
@@ -309,17 +348,59 @@ public class Assignment extends Activity implements View.OnClickListener, Locati
 
 
     @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        if (requestCode == 111)
+        {
+            if(!hasPermissions(this, new String[]{Manifest.permission.CAMERA})){
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, 111);
+            }
+            else
+            {
+                CaptureImage();
+            }
+        }
+
+    }
+
+    private void CaptureImage()
+    {
+        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        // Ensure that there's a camera activity to handle the intent
+        if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+            // Create the File where the photo should go
+            File photoFile = null;
+            try {
+                photoFile = createImageFile();
+            } catch (IOException ex) {
+                // Error occurred while creating the File
+
+            }
+            // Continue only if the File was successfully created
+            if (photoFile != null) {
+                takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT,
+                        Uri.fromFile(photoFile));
+                startActivityForResult(takePictureIntent, CAPTURE_IMAGE_REQUEST);
+            }
+        }
+    }
+
+    private static boolean hasPermissions(Context context, String... permissions) {
+        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && context != null && permissions != null) {
+            for (String permission : permissions) {
+                if (ActivityCompat.checkSelfPermission(context, permission) != PackageManager.PERMISSION_GRANTED) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    @Override
     public void onClick(View v) {
 
 
-        if (v == browser) {
-            Intent intent = new Intent();
-
-            intent.setAction(Intent.ACTION_GET_CONTENT);
-            intent.setType("file/*");
-            startActivityForResult(Intent.createChooser(intent, "Select File"), PICK_IMAGE_REQUEST);
-
-        }
 
 
 
@@ -346,26 +427,6 @@ public class Assignment extends Activity implements View.OnClickListener, Locati
 
         }
 
-        if (v == camera) {
-            Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-            // Ensure that there's a camera activity to handle the intent
-            if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
-                // Create the File where the photo should go
-                File photoFile = null;
-                try {
-                    photoFile = createImageFile();
-                } catch (IOException ex) {
-                    // Error occurred while creating the File
-
-                }
-                // Continue only if the File was successfully created
-                if (photoFile != null) {
-                    takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT,
-                            Uri.fromFile(photoFile));
-                    startActivityForResult(takePictureIntent, CAPTURE_IMAGE_REQUEST);
-                }
-            }
-        }
 
 
             if (v == submit) {
