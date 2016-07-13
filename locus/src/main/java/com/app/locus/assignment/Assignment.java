@@ -353,12 +353,20 @@ public class Assignment extends Activity implements View.OnClickListener, Locati
 
         if (requestCode == 111)
         {
-            if(!hasPermissions(this, new String[]{Manifest.permission.CAMERA})){
-                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, 111);
+            if(ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED){
+                CaptureImage();
             }
             else
             {
-                CaptureImage();
+                if (ActivityCompat.shouldShowRequestPermissionRationale(this , Manifest.permission.CAMERA) ) {
+
+                    Toast.makeText(getApplicationContext() , "Camera permission is required to access Camera" , Toast.LENGTH_SHORT).show();
+
+                }
+                else {
+                    Toast.makeText(this, "Go to settings and enable permissions", Toast.LENGTH_LONG)
+                            .show();
+                }
             }
         }
 
