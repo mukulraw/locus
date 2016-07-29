@@ -292,7 +292,15 @@ public class Assignment extends Activity implements View.OnClickListener, Locati
         _subject.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                bean.setSubject(listSpinner2[position]);
+                if (position>0)
+                {
+                    bean.setSubject(listSpinner2[position]);
+                }
+                else
+                {
+                    bean.setSubject("---");
+                }
+
             }
 
             @Override
@@ -308,7 +316,15 @@ public class Assignment extends Activity implements View.OnClickListener, Locati
         _grade.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                bean.setGrade(listSpinner3[position]);
+                if (position>0)
+                {
+                    bean.setGrade(listSpinner3[position]);
+                }
+                else
+                {
+                    bean.setGrade("---");
+                }
+
             }
 
             @Override
@@ -324,7 +340,15 @@ public class Assignment extends Activity implements View.OnClickListener, Locati
         _reference.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                bean.setReference(listSpinner4[position]);
+                if (position>0)
+                {
+                    bean.setReference(listSpinner4[position]);
+                }
+                else
+                {
+                    bean.setReference("---");
+                }
+
             }
 
             @Override
@@ -1072,6 +1096,7 @@ public class Assignment extends Activity implements View.OnClickListener, Locati
                 multipart.addFormField("subject", subject);
                 multipart.addFormField("pagrade", grade);
                 multipart.addFormField("reference", reference);
+                Log.d("Asdasdasd" , reference);
                 multipart.addFormField("lastdateofsubmission", last_date);
                 multipart.addFormField("textarea", area_text);
                 multipart.addFormField("paexpect", expected);
